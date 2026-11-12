@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+<defs>
+<linearGradient id="wall" x2="0" y2="1"><stop stop-color="#071422"/><stop offset=".48" stop-color="#152737"/><stop offset="1" stop-color="#080e16"/></linearGradient>
+<linearGradient id="desk" x2="0" y2="1"><stop stop-color="#b28c5d"/><stop offset=".33" stop-color="#6a472c"/><stop offset=".82" stop-color="#382517"/><stop offset="1" stop-color="#101824"/></linearGradient>
+<linearGradient id="screen" x2="0" y2="1"><stop stop-color="#143c58"/><stop offset="1" stop-color="#06182b"/></linearGradient>
+<radialGradient id="topLight"><stop stop-color="#9fd5f7" stop-opacity=".22"/><stop offset="1" stop-color="#7ecff6" stop-opacity="0"/></radialGradient>
+<filter id="shadow"><feGaussianBlur stdDeviation="20"/></filter>
+</defs>
+<rect width="1600" height="900" fill="url(#wall)"/>
+<path d="M0 65H1600M0 520H1600" stroke="#587084" stroke-width="3" opacity=".35"/>
+<g opacity=".54" stroke="#58768e" stroke-width="4"><path d="M70 70V540M320 70V540M1280 70V540M1530 70V540"/><path d="M0 160H1600" stroke-width="1"/></g>
+<g opacity=".7"><rect x="349" y="90" width="902" height="424" rx="8" fill="#060e19" stroke="#708695" stroke-width="7"/><rect x="370" y="107" width="860" height="391" fill="url(#screen)"/><path d="M370 220H1230M370 330H1230M370 445H1230M520 107V498M670 107V498M820 107V498M970 107V498M1120 107V498" stroke="#6de3ff" stroke-opacity=".12" stroke-width="2"/><path d="M590 390Q620 300 680 315T800 265T925 300T1060 255L1150 315" fill="none" stroke="#87cff0" stroke-opacity=".6" stroke-width="6" stroke-linecap="round"/><circle cx="928" cy="302" r="14" fill="#f0b879"/><circle cx="928" cy="302" r="39" fill="none" stroke="#f0b879" opacity=".3" stroke-width="4"/><text x="410" y="148" fill="#98c8e0" font-size="24" font-family="Arial,sans-serif" letter-spacing="8">SECURITY CABINET</text><text x="410" y="478" fill="#6fa0b9" font-size="17" font-family="Arial,sans-serif" letter-spacing="4">NORTHERN SECTOR SITUATION DISPLAY</text></g>
+<g opacity=".15"><ellipse cx="270" cy="180" rx="350" ry="330" fill="url(#topLight)"/><ellipse cx="1300" cy="180" rx="350" ry="330" fill="url(#topLight)"/></g>
+<g opacity=".38" fill="#0d1824" stroke="#476278" stroke-width="2"><rect x="85" y="200" width="220" height="220" rx="4"/><rect x="1296" y="200" width="220" height="220" rx="4"/><path d="M85 310H305M1296 310H1516"/></g>
+<g fill="#09131d" stroke="#385267" stroke-width="4"><rect x="230" y="528" width="120" height="174" rx="35"/><rect x="410" y="514" width="120" height="174" rx="35"/><rect x="594" y="505" width="120" height="174" rx="35"/><rect x="778" y="505" width="120" height="174" rx="35"/><rect x="962" y="514" width="120" height="174" rx="35"/><rect x="1150" y="528" width="120" height="174" rx="35"/></g>
+<ellipse cx="805" cy="761" rx="790" ry="160" fill="#000" opacity=".8" filter="url(#shadow)"/>
+<path d="M110 790C230 605 465 570 800 564C1150 570 1385 605 1490 790L1390 867H208Z" fill="url(#desk)" stroke="#b69570" stroke-width="7"/>
+<path d="M200 784C317 638 512 616 800 611C1087 616 1284 638 1405 784" fill="none" stroke="#dbbd8e" stroke-opacity=".45" stroke-width="5"/>
+<path d="M240 855H1360" stroke="#382818" stroke-width="24"/>
+<g opacity=".8"><ellipse cx="550" cy="724" rx="44" ry="16" fill="#081b28" stroke="#bca77c" stroke-width="3"/><ellipse cx="1020" cy="724" rx="44" ry="16" fill="#081b28" stroke="#bca77c" stroke-width="3"/><ellipse cx="806" cy="755" rx="44" ry="16" fill="#081b28" stroke="#bca77c" stroke-width="3"/></g>
+<rect x="0" y="0" width="1600" height="900" fill="#07121c" opacity=".13"/>
+</svg>
