@@ -28,7 +28,7 @@ The six chapters cover 1978, 1982, 1993, 2000, 2006 and 2024. A final historical
 4. Upload the extracted files and the `assets` folder contents. Make sure `index.html` is located at the repository root, not inside another folder.
 5. Enter this exact suggested commit message:
 
-   `Add 1970s archive Hezbollah chapter and 2006 UN briefing`
+   `Update Northern Front chapter images and video autoplay`
 
 6. Select **Commit changes**.
 7. Open **Settings**, then **Pages**.
@@ -46,7 +46,7 @@ Run these commands from the extracted project folder, with the remote pointing a
 git init
 git branch -M main
 git add .
-git commit -m "Add 1970s archive Hezbollah chapter and 2006 UN briefing"
+git commit -m "Update Northern Front chapter images and video autoplay"
 git remote add origin https://github.com/yehuda-swu/northernfront.git
 git push -u origin main
 ```
@@ -55,7 +55,7 @@ If your local project already tracks a remote repository, do not run `git init` 
 
 ```bash
 git add .
-git commit -m "Add 1970s archive Hezbollah chapter and 2006 UN briefing"
+git commit -m "Update Northern Front chapter images and video autoplay"
 git push
 ```
 
@@ -68,7 +68,7 @@ Replace an archive photo by keeping the same filename in the `assets` folder. Th
 ## Accessibility and troubleshooting
 
 * Classroom mode enlarges text. It can be switched on at the top of the screen.
-* Audio is off by default. Select SOUND OFF to enable a low ambient tone. Browsers require an interaction before audio playback.
+* Ambient sound is off by default. Select SOUND OFF to enable it. Archive clips autoplay muted on entering the 1982 and 1993 briefings. Use the video player speaker control to enable sound. Browsers often block autoplay with audio.
 * Motion respects the device's reduced movement preference.
 * Decision buttons are keyboard accessible; the dialogue closes with Escape.
 * The source documents are web links and will require an internet connection.
@@ -86,16 +86,24 @@ The maps and logos were supplied as user materials. The six archive panels come 
 ## Update: archive material and sixth chapter
 
 * Chapter 1 now includes image dossiers for the Avivim bus attack, Kiryat Shmona and Maalot. The Maalot historical photograph is hidden behind a content notice until requested.
-* Chapter 2 includes an optional 78 second MP4 clip extracted from the uploaded 1982 footage.
-* Chapter 3 (new) covers Hezbollah's rise and Operation Accountability in 1993. A 68 second modern news explainer is optional.
-* Chapter 5 includes the supplied Katyusha attack illustration, photographs of Goldwasser and Regev, IDF soldiers, a UN Security Council photo and a seven part explanation of Resolution 1701.
+* Chapter 2 uses the newly supplied 1982 armoured forces photograph in its cabinet meeting and a second supplied photograph on the historical reveal page. It also includes a 78 second MP4 clip that starts automatically when the chapter briefing appears.
+* Chapter 3 (new) covers Hezbollah's rise and Operation Accountability in 1993. A 68 second modern news explainer starts automatically when the chapter briefing appears.
+* Chapter 5 uses the newly supplied 2006 IDF photograph on the historical reveal page, and includes the Katyusha attack illustration, photographs of Goldwasser and Regev, IDF soldiers, a UN Security Council photo and a seven part explanation of Resolution 1701.
 * Body copy, choices and adviser fonts are larger. The layout scales to phones and classroom screens.
-* The complete interactive game still works without internet access, although linked sources require internet. Videos are optional and do not autoplay.
+* The complete interactive game still works without internet access, although linked sources require internet. Both historical clips now start automatically (muted, as required by most browsers). Use the video controls to enable sound or pause playback. They remain optional to watch.
 
 ### Video size and classroom time
 
-The original videos exceed 24 minutes and 5 minutes. To keep the game suitable for a 12 to 15 minute lesson, only excerpts are bundled. Both excerpts have been reencoded for web playback. Showing both clips will extend the activity. Educators can skip them without affecting gameplay.
+The original videos exceed 24 minutes and 5 minutes. To keep the game suitable for a 12 to 15 minute lesson, only excerpts are bundled. Both excerpts have been reencoded for web playback. Clips begin automatically, muted, but viewers can pause or skip them without affecting gameplay. Watching both in full extends the 12 to 15 minute activity.
 
 ### Media rights
 
 Both clips and the new photographs may contain third party copyrighted material. In particular the 1982 clip carries an AP logo. **Verify publishing rights before uploading these assets to a public repository.** The file package is technically ready for GitHub Pages but this is not a guarantee of permission to publish every included photograph or video.
+
+## Version 3: new chapter images and autoplay
+
+* Chapter 2 cabinet: supplied 1982 photograph of Israeli armoured vehicles.
+* Chapter 2 historical reveal: supplied 1982 photograph of soldiers on an armoured vehicle.
+* Chapter 5 historical reveal: supplied 2006 photograph of Israeli soldiers.
+* Both bundled MP4 clips automatically play in the briefing as embedded videos. Autoplay is muted for browser compatibility, with controls to unmute and pause. The expand button opens an enlarged player.
+* New photographs are resized and compressed to WebP for GitHub Pages.

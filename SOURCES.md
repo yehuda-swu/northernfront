@@ -68,3 +68,11 @@ The maps, photos, presentation and footage were uploaded by the user for prepara
 * The seven item Resolution 1701 teaching panel summarises the UN document. It is not a full legal reproduction.
 
 Maps with organisational symbols are schematic visuals, not statements of precise territorial control. Animated movement markers are not georeferenced troop positions. All sources are educational background and some represent one institutional perspective.
+
+## Additional supplied archive photographs (Version 3)
+
+* `assets/media/lebanon_1982_cabinet.webp`: 1982 Israeli armoured forces photograph supplied by the user. Shown in Chapter 2 cabinet meeting.
+* `assets/media/lebanon_1982_reveal.webp`: 1982 Israeli soldiers and an armoured vehicle photograph supplied by the user. Shown in Chapter 2 historical reveal.
+* `assets/media/lebanon_2006_reveal.webp`: 2006 Israeli soldiers photograph supplied by the user. Shown in Chapter 5 historical reveal.
+
+Photo rights and attribution require confirmation before public deployment.
