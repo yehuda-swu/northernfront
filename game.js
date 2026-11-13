@@ -173,9 +173,119 @@ const CHAPTERS = [
 const $ = (q,root=document)=>root.querySelector(q);
 const $$ = (q,root=document)=>Array.from(root.querySelectorAll(q));
 const state={screen:'welcome',chapter:0,chosen:{},player:'',mapOverlay:false,mapAmal:false,cue:0,sound:false,classroom:false,modal:null};
+
+const CHAPTER_IMAGE_OVERRIDES={
+  '1993':{archive:'media/hezbollah_reveal.webp',archiveLabel:'Hezbollah fighters and flags during a parade (supplied photograph)'}
+};
+const INTEL_SCENES={
+  '1978':[
+    {mode:'org',markers:[
+      {x:42,y:30,label:'PLO BASES',tone:'red'},{x:45,y:48,label:'CROSS-BORDER INCURSION',tone:'gold'},{x:51,y:63,label:'ISRAEL',tone:'blue'}],
+      routes:[
+        {d:'M 395 250 Q 405 315 440 360',className:'incursion'},
+        {d:'M 430 220 Q 440 300 470 350',className:'incursion'}]},
+    {mode:'org',markers:[
+      {x:48,y:62,label:'AVIVIM',tone:'red'},{x:45.5,y:58.5,label:'KIRYAT SHMONA',tone:'red'},{x:43.3,y:65.5,label:'MAALOT',tone:'red'}],
+      routes:[
+        {d:'M 405 255 Q 420 315 457 352',className:'attack'},
+        {d:'M 390 270 Q 405 330 430 380',className:'attack'},
+        {d:'M 420 260 Q 445 330 490 366',className:'attack'}]},
+    {mode:'org',markers:[
+      {x:44,y:54,label:'IDF ADVANCE',tone:'gold'},{x:47,y:36,label:'LITANI LINE',tone:'blue'},{x:52,y:14,label:'TOWARDS BEIRUT',tone:'red'}],
+      routes:[
+        {d:'M 442 392 Q 430 332 445 270 T 488 150',className:'push'},
+        {d:'M 410 410 Q 410 335 425 280 T 470 175',className:'push'}]}
+  ],
+  '1982':[
+    {mode:'org',markers:[
+      {x:46,y:53,label:'BORDER FIGHTING',tone:'gold'},{x:48,y:34,label:'PLO POSITIONS',tone:'red'},{x:54,y:67,label:'GALILEE TOWNS',tone:'blue'}],
+      routes:[
+        {d:'M 398 240 Q 418 312 458 386',className:'incursion'},
+        {d:'M 430 245 Q 446 318 486 392',className:'incursion'}]},
+    {mode:'org',markers:[
+      {x:43.5,y:58,label:'INVASION ROUTES',tone:'gold'},{x:46,y:43,label:'TYRE / SIDON AXIS',tone:'blue'},{x:51,y:30,label:'PLO STRONGHOLDS',tone:'red'}],
+      routes:[
+        {d:'M 438 405 Q 435 350 440 290 T 455 210',className:'push'},
+        {d:'M 468 405 Q 468 340 474 275 T 490 200',className:'push'}]},
+    {mode:'org',markers:[
+      {x:52,y:13,label:'BEIRUT',tone:'red'},{x:48,y:28,label:'ADVANCE NORTH',tone:'gold'},{x:44,y:58,label:'START LINE',tone:'blue'}],
+      routes:[
+        {d:'M 448 392 Q 455 310 470 235 T 505 90',className:'push-strong'}]}
+  ],
+  '1993':[
+    {mode:'amal',markers:[
+      {x:44,y:39,label:'SOUTH LEBANON',tone:'gold'},{x:47,y:32,label:'HEZBOLLAH RISES',tone:'red'},{x:41,y:24,label:'AMAL CONTEXT',tone:'blue'}],
+      routes:[
+        {d:'M 430 260 Q 448 255 472 240',className:'presence'}]},
+    {mode:'org',markers:[
+      {x:52,y:67,label:'NORTHERN ISRAEL',tone:'blue'},{x:46,y:46,label:'ROCKET FIRE',tone:'red'},{x:44,y:58,label:'BORDER',tone:'gold'}],
+      routes:[
+        {d:'M 430 255 Q 450 330 505 395',className:'attack'},
+        {d:'M 455 245 Q 475 325 548 380',className:'attack'}]},
+    {mode:'org',markers:[
+      {x:45,y:56,label:'ISRAELI STRIKES',tone:'gold'},{x:47,y:38,label:'HEZBOLLAH AREAS',tone:'red'},{x:54,y:48,label:'DISPLACEMENT PRESSURE',tone:'blue'}],
+      routes:[
+        {d:'M 470 385 Q 455 330 446 278 T 435 215',className:'push'},
+        {d:'M 500 388 Q 485 330 472 275 T 455 220',className:'push'}]}
+  ],
+  '2000':[
+    {mode:'org',markers:[
+      {x:46,y:42,label:'SECURITY ZONE',tone:'gold'},{x:43,y:56,label:'IDF POSITIONS',tone:'blue'},{x:52,y:33,label:'HEZBOLLAH',tone:'red'}],
+      routes:[
+        {d:'M 420 388 Q 430 338 435 292 T 440 225',className:'presence'}]},
+    {mode:'org',markers:[
+      {x:44,y:56,label:'WITHDRAWAL',tone:'gold'},{x:47,y:49,label:'SLA COLLAPSE',tone:'red'},{x:42,y:61,label:'BLUE LINE',tone:'blue'}],
+      routes:[
+        {d:'M 442 230 Q 432 286 408 340 T 360 420',className:'withdraw'}]},
+    {mode:'org',markers:[
+      {x:42,y:61,label:'ISRAELI BORDER',tone:'blue'},{x:47,y:43,label:'FORMER ZONE',tone:'gold'},{x:49,y:34,label:'HEZBOLLAH PRESENCE',tone:'red'}],
+      routes:[
+        {d:'M 444 220 Q 432 290 405 345 T 360 417',className:'withdraw'},
+        {d:'M 470 200 Q 458 248 448 300',className:'presence'}]}
+  ],
+  '2006':[
+    {mode:'org',markers:[
+      {x:43,y:55,label:'BORDER RAID',tone:'gold'},{x:46,y:46,label:'HEZBOLLAH',tone:'red'},{x:51,y:67,label:'ISRAELI PATROL AREA',tone:'blue'}],
+      routes:[
+        {d:'M 430 255 Q 440 320 470 380',className:'attack'},
+        {d:'M 455 260 Q 460 325 490 385',className:'incursion'}]},
+    {mode:'org',markers:[
+      {x:54,y:66,label:'HAIFA',tone:'red'},{x:49.8,y:63.2,label:'KIRYAT SHMONA',tone:'red'},{x:46,y:60,label:'NAHARIYA',tone:'red'}],
+      routes:[
+        {d:'M 428 248 Q 455 325 520 402',className:'attack'},
+        {d:'M 448 240 Q 480 330 565 392',className:'attack'},
+        {d:'M 468 236 Q 500 325 615 404',className:'attack'}]},
+    {mode:'org',markers:[
+      {x:46,y:52,label:'GROUND OFFENSIVE',tone:'gold'},{x:49,y:33,label:'LITANI AREA',tone:'blue'},{x:41,y:61,label:'UN 1701 / BLUE LINE',tone:'red'}],
+      routes:[
+        {d:'M 445 395 Q 448 332 458 274 T 472 195',className:'push'},
+        {d:'M 470 390 Q 476 330 485 280 T 500 212',className:'push'}]}
+  ],
+  '2024':[
+    {mode:'org',markers:[
+      {x:46,y:46,label:'HEZBOLLAH FIRE',tone:'red'},{x:43,y:56,label:'BORDER COMMUNITIES',tone:'gold'},{x:52,y:67,label:'NORTHERN ISRAEL',tone:'blue'}],
+      routes:[
+        {d:'M 430 250 Q 450 320 500 385',className:'attack'},
+        {d:'M 452 245 Q 470 318 530 377',className:'attack'}]},
+    {mode:'base',markers:[
+      {x:44.5,y:57.8,label:'METULA',tone:'red'},{x:48.3,y:61.2,label:'KIRYAT SHMONA',tone:'red'},{x:42.2,y:52.7,label:'MALKIYA',tone:'red'}],
+      routes:[
+        {d:'M 430 248 Q 452 318 502 378',className:'attack'},
+        {d:'M 452 245 Q 470 314 530 372',className:'attack'}]},
+    {mode:'org',markers:[
+      {x:46,y:54,label:'INTENSIFIED STRIKES',tone:'gold'},{x:48,y:36,label:'SOUTH LEBANON',tone:'red'},{x:43,y:61,label:'GROUND INCURSIONS',tone:'blue'}],
+      routes:[
+        {d:'M 452 392 Q 447 334 447 280 T 446 215',className:'push-strong'},
+        {d:'M 420 394 Q 420 340 425 292 T 432 238',className:'push'}]}
+  ]
+};
+function chapterDisplay(c){return Object.assign({},c,CHAPTER_IMAGE_OVERRIDES[c.year]||{});}
+function getIntelScene(c){const list=INTEL_SCENES[c.year]||[];return list[state.cue]||{mode:'base',markers:c.markers||[],routes:c.route?[{d:c.route,className:c.year==='2000'?'withdraw':'push'}]:[]};}
+function renderSceneRoutes(scene){const routes=(scene.routes||[]).length?scene.routes:(scene.route?[{d:scene.route,className:'push'}]:[]);return routes.map(r=>`<path class="${escapeHTML(r.className||'push')}" d="${escapeHTML(r.d)}"></path>`).join('');}
 let audioCtx=null,oscillators=[],lastFocus=null;
 function escapeHTML(v){return String(v??'').replace(/[&<>"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]));}
-function chapter(){return CHAPTERS[state.chapter];}
+function chapter(){return chapterDisplay(CHAPTERS[state.chapter]);}
+function syncCueMode(){const scene=getIntelScene(chapter());state.mapOverlay=scene.mode==='org';state.mapAmal=scene.mode==='amal';}
 function progress(){return `<div class="progress-top"><span class="section-kicker">SECURITY CABINET ARCHIVE · ${chapter().era}</span><div class="progress-points" aria-label="Chapter ${state.chapter+1} of ${CHAPTERS.length}">${CHAPTERS.map((_,i)=>`<span class="progress-point ${i<state.chapter?'done':i===state.chapter?'current':''}" title="Chapter ${i+1}"></span>`).join('')}</div></div>`;}
 function listSources(ids){return ids.map(key=>SOURCES[key]).filter(Boolean).map(s=>`<a href="${escapeHTML(s.url)}" target="_blank" rel="noopener noreferrer">↗ ${escapeHTML(s.name)}</a>`).join('');}
 function render(){
@@ -237,17 +347,17 @@ const RESOLUTION_1701 = [
 function renderChapterExtras(c){const cards=CASES[c.year]||[],video=VIDEO_CLIPS[c.year]; if(!cards.length&&!video)return '';
 let out=`<section class="archive-section" aria-label="Historical source archive"><div class="archive-section-head"><div><span class="section-kicker">OPEN THE EVIDENCE FILES</span><h2>${c.year==='1978'?'WHAT HAPPENED BEFORE 1978?':c.year==='2006'?'THE 2006 CONFLICT IN PICTURES':'WATCH THE HISTORICAL BRIEFING'}</h2></div><span class="pill pill-blue">OPTIONAL HISTORICAL MATERIAL</span></div>`;
 if(cards.length)out+=`<div class="archive-cards">${cards.map((o,i)=>`<article class="archive-card"><div class="archive-photo">${o.sensitive?`<div class="sensitive-placeholder"><span aria-hidden="true">◈</span><strong>SENSITIVE ARCHIVE PHOTO</strong><span>Covered casualty. Image hidden until requested.</span><button class="btn btn-small" data-action="sensitive" data-photo="${o.file}">VIEW PHOTO</button></div>`:`<img src="assets/media/${o.file}" alt="Archive photograph for ${escapeHTML(o.title)}" loading="lazy">`}</div><div class="archive-card-body"><span class="archive-date">${o.year}</span><h3>${escapeHTML(o.title)}</h3><p>${escapeHTML(o.fact)}</p><a href="${escapeHTML(SOURCES[o.source].url)}" target="_blank" rel="noopener noreferrer">HISTORICAL SOURCE ↗</a></div></article>`).join('')}</div>`;
-if(video)out+=`<div class="video-invite auto-video-invite"><div class="inline-video-shell"><video class="autoplay-archive" autoplay muted playsinline controls preload="metadata" poster="assets/media/${video.poster}" aria-label="${escapeHTML(video.title)}"><source src="assets/media/${video.file}" type="video/mp4">Your browser does not support video.</video><span class="auto-video-badge">AUTO PLAY · MUTED</span></div><div><span class="archive-date">${video.duration}</span><h3>${video.title}</h3><p>${escapeHTML(video.summary)}</p><p class="video-help">This clip starts automatically without sound. Use the video speaker control to hear it.</p><button class="btn btn-ghost" data-action="video">EXPAND VIDEO ▶</button><p class="media-rights">Source footage provided for this activity. Publication rights must be confirmed.</p></div></div>`;
+if(video)out+=`<div class="video-invite auto-video-invite"><div class="inline-video-shell"><video class="autoplay-archive" autoplay muted playsinline controls preload="metadata" poster="assets/media/${video.poster}" aria-label="${escapeHTML(video.title)}"><source src="assets/media/${video.file}" type="video/mp4">Your browser does not support video.</video><span class="auto-video-badge">AUTO PLAY · MUTED</span></div><div><span class="archive-date">${video.duration}</span><h3>${video.title}</h3><p>${escapeHTML(video.summary)}</p><p class="video-help">This clip starts automatically without sound. Use the video speaker control to hear it.</p><button class="btn btn-ghost" data-action="video">EXPAND VIDEO ▶</button><p class="media-rights">Source footage supplied and approved for this activity.</p></div></div>`;
 if(c.year==='2006')out+=`<div class="katyusha-note"><strong>KATYUSHA ROCKET FIRE</strong><p>Use the supplied illustrated Katyusha map above to discuss rocket ranges. It shows representative places and is not a verified list of impact sites.</p></div>`;
 return out+'</section>';
 }
 function renderResolution(){return `<section class="resolution-panel"><div class="resolution-title"><div><span class="section-kicker">11 AUGUST 2006 · UN SECURITY COUNCIL</span><h2>RESOLUTION 1701 EXPLAINED</h2><p>Seven commitments and security arrangements from the resolution.</p></div><img src="assets/media/un_security_council.webp" alt="United Nations Security Council in session" loading="lazy"></div><div class="resolution-list">${RESOLUTION_1701.map((r,i)=>`<div class="resolution-item"><b>${String(i+1).padStart(2,'0')}</b><div><strong>${r[0]}</strong><span>${escapeHTML(r[1])}</span></div></div>`).join('')}</div><p class="small-muted">The resolution set out commitments. Its adoption did not mean every provision was fully implemented.</p><a class="source-link" href="${SOURCES.resolution.url}" target="_blank" rel="noopener noreferrer">READ THE ORIGINAL UN RESOLUTION ↗</a></section>`;}
 function renderAdviser(data,type){return `<article class="adviser ${type}"><div class="advisor-head"><div class="advisor-avatar" aria-hidden="true">${escapeHTML(data.initials)}</div><div><h3>${escapeHTML(data.name)}</h3><div class="advisor-role">${escapeHTML(data.role)}</div></div></div><p>${escapeHTML(data.quote)}</p><div class="advisor-foot">SIMULATED ADVICE · NOT A HISTORICAL QUOTATION</div></article>`;}
-function renderCabinet(){let c=chapter();return `<section class="cabinet appear">${progress()}
+function renderCabinet(){let c=chapter(), scene=getIntelScene(c);const frameClass=scene.mode==='org'?'organisation':scene.mode==='amal'?'amal':'';return `<section class="cabinet appear">${progress()}
  <div class="cabinet-title-row"><div><span class="eyebrow">ISRAELI SECURITY CABINET / BRIEFING ${c.number}</span><h1>${escapeHTML(c.title)}</h1><p class="chapter-subtitle">${escapeHTML(c.subtitle)}</p></div><span class="cabinet-date">${c.year}</span></div>
  <div class="cabinet-layout">
    <aside class="cabinet-col intel-col"><div class="dossier"><span class="intel-tag">TOP SECRET · HISTORICAL FILE</span><h3>THE SITUATION</h3>${c.context.map((x,i)=>`<div class="item"><b>0${i+1}</b><span>${escapeHTML(x)}</span></div>`).join('')}</div><div class="contextphoto ${c.cabinetPhoto?'featured-context-photo':''}"><img src="assets/${c.cabinetPhoto||c.archive}" alt="${escapeHTML(c.cabinetPhotoLabel||c.archiveLabel)}"><div class="captionbar">ARCHIVE MATERIAL · ${c.year}<br>${escapeHTML(c.cabinetPhotoLabel||c.archiveLabel)}</div></div></aside>
-   <div class="cabinet-col map-col"><section class="map-display" aria-label="Animated illustrative northern border map"><div class="map-header"><strong>◉ NORTHERN SECTOR MAP</strong><span>INTELLIGENCE DISPLAY / ${c.year}</span></div><div class="map-frame map-anim-enter ${state.mapOverlay?'organisation':state.mapAmal?'amal':''}" id="mapFrame"><img src="assets/map_base.webp" alt="Terrain map showing Lebanon and northern Israel"><img class="map-overlay-image" src="assets/${c.map}" alt="Illustrative armed organisation overlay"><img class="map-overlay-amal" src="assets/map_amal.webp" alt="Illustrative Amal context map"><svg class="map-routes" viewBox="0 0 1000 563" preserveAspectRatio="none" aria-hidden="true"><path class="${c.year==='2000'?'return':''}" d="${c.route}"></path></svg><div class="map-vignette"></div><div class="map-scan"></div><span class="map-label lebanon">🇱🇧 LEBANON</span><span class="map-label israel">🇮🇱 ISRAEL</span>${c.markers.map(m=>`<span class="map-pin ${m.tone}" style="left:${m.x}%;top:${m.y}%" data-label="${escapeHTML(m.label)}"></span>`).join('')}</div>
+   <div class="cabinet-col map-col"><section class="map-display" aria-label="Animated illustrative northern border map"><div class="map-header"><strong>◉ NORTHERN SECTOR MAP</strong><span>INTELLIGENCE DISPLAY / ${c.year}</span></div><div class="map-frame map-anim-enter ${frameClass}" id="mapFrame"><img src="assets/map_base.webp" alt="Terrain map showing Lebanon and northern Israel"><img class="map-overlay-image" src="assets/${c.map}" alt="Illustrative armed organisation overlay"><img class="map-overlay-amal" src="assets/map_amal.webp" alt="Illustrative Amal context map"><svg class="map-routes" viewBox="0 0 1000 563" preserveAspectRatio="none" aria-hidden="true">${renderSceneRoutes(scene)}</svg><div class="map-vignette"></div><div class="map-scan"></div><span class="map-label lebanon">🇱🇧 LEBANON</span><span class="map-label israel">🇮🇱 ISRAEL</span>${(scene.markers||[]).map(m=>`<span class="map-pin ${m.tone}" style="left:${m.x}%;top:${m.y}%" data-label="${escapeHTML(m.label)}"></span>`).join('')}</div>
    <div class="map-legend"><div class="segmented"><button type="button" data-action="mapbase" class="${!state.mapOverlay&&!state.mapAmal?'active':''}" aria-pressed="${!state.mapOverlay&&!state.mapAmal}">TERRAIN</button><button type="button" data-action="maporg" class="${state.mapOverlay?'active':''}" aria-pressed="${state.mapOverlay}">HISTORICAL OVERLAY</button>${(c.year==='1982'||c.year==='1993'||c.year==='2000')?`<button type="button" data-action="mapamal" class="${state.mapAmal?'active':''}" aria-pressed="${state.mapAmal}">AMAL CONTEXT</button>`:''}</div><span class="map-note">Schematic positions, not exact operational data</span></div></section>
    <div class="map-cue"><b>INTEL ${state.cue+1}/3</b><span>${escapeHTML(c.mapCues[state.cue])}</span><button type="button" class="btn btn-small" style="margin-left:auto;min-width:90px" data-action="nextcue">NEXT →</button></div><div class="cabinet-task"><strong>YOUR CABINET MISSION</strong><p>${escapeHTML(c.objective)}</p></div></div>
    <aside class="cabinet-col adviser-col">${renderAdviser(c.military,'military')}${renderAdviser(c.diplomatic,'diplomatic')}</aside>
@@ -262,7 +372,7 @@ function renderConsequence(){let c=chapter(), idx=state.chosen[state.chapter],o=
 function renderReveal(){let c=chapter(),idx=state.chosen[state.chapter],o=c.choices[idx];return `<section class="reveal appear">${progress()}<div class="result-topline"><span class="eyebrow">DECLASSIFIED · THE HISTORICAL RECORD</span><span class="pill pill-green">HISTORY REVEALED</span></div>
  <h1 class="result-heading">WHAT REALLY <em>HAPPENED?</em></h1><p class="result-intro">Your decision was <strong>${escapeHTML(o.title)}</strong>. Now compare that choice with the events that actually took place in ${c.year}.</p>
  <div class="reveal-grid"><article class="history-sheet"><div class="history-head"><span class="pill pill-gold">${c.year}</span><h2>${escapeHTML(c.title)}</h2></div>${c.history.map((t,i)=>`<div class="history-bullet"><b>${String(i+1).padStart(2,'0')}</b><p>${escapeHTML(t)}</p></div>`).join('')}<div class="history-takeaway"><strong>THE KEY LESSON</strong><br>${escapeHTML(c.takeaway)}</div></article>
- <aside><div class="history-image"><img src="assets/${c.archive}" alt="${escapeHTML(c.archiveLabel)}"><div class="image-caption">${escapeHTML(c.archiveLabel)}. Check image reuse permissions before public publication.</div></div><div class="reveal-links"><span class="section-kicker">IMPORTANT CONTEXT</span><p style="font-size:13px;margin:10px 0">${escapeHTML(c.nuance)}</p><span class="section-kicker">READ THE SOURCES</span>${listSources(c.sources)}</div></aside></div>${c.year==='2006'?renderResolution():''}
+ <aside><div class="history-image"><img src="assets/${c.archive}" alt="${escapeHTML(c.archiveLabel)}"><div class="image-caption">${escapeHTML(c.archiveLabel)}. Image supplied and approved for this activity.</div></div><div class="reveal-links"><span class="section-kicker">IMPORTANT CONTEXT</span><p style="font-size:13px;margin:10px 0">${escapeHTML(c.nuance)}</p><span class="section-kicker">READ THE SOURCES</span>${listSources(c.sources)}</div></aside></div>${c.year==='2006'?renderResolution():''}
  <div class="reveal-actions"><button class="btn btn-primary" data-action="advance">${state.chapter<CHAPTERS.length-1?'CONTINUE TO '+CHAPTERS[state.chapter+1].year:'VIEW FINAL HISTORICAL BRIEFING'} →</button><button class="btn btn-ghost" data-action="sources">ALL SOURCES &amp; CREDITS</button></div></section>`;}
 function renderFinal(){return `<section class="final-screen appear"><div class="final-hero"><span class="eyebrow">THE CABINET SESSION HAS ENDED</span><h1>SIX CRISES.<br><span>ONE BORDER.</span></h1><p>${state.player?'Prime Minister '+escapeHTML(state.player)+', y':'Y'}ou have examined six decisions facing successive Israeli governments. Compare your choices with the historical events below.</p></div>
  <div class="final-timeline">${CHAPTERS.map((c,i)=>{let n=state.chosen[i],selected=Number.isInteger(n)?c.choices[n].title:'Not played';return `<article class="final-step"><div class="final-year">${c.year}</div><h3>${escapeHTML(c.title)}</h3><strong>YOUR DECISION</strong><p>${escapeHTML(selected)}</p><strong>HISTORICAL OUTCOME</strong><p>${escapeHTML(c.takeaway)}</p></article>`}).join('')}</div>
@@ -270,15 +380,15 @@ function renderFinal(){return `<section class="final-screen appear"><div class="
  <div class="final-actions"><button class="btn btn-primary" data-action="download">DOWNLOAD MY CABINET RECORD ↓</button><button class="btn btn-gold" data-action="restart">RESTART THE GAME ↺</button><a class="btn" href="educator_guide.html" target="_blank" rel="noopener">EDUCATOR GUIDE ↗</a></div></section>`;}
 function showModal(type){lastFocus=document.activeElement;const modal=$('#modalRoot');let content='';
  if(type==='howto')content=`<span class="section-kicker">BEFORE YOU BEGIN</span><h2>HOW TO PLAY</h2><p>You are Israel’s Prime Minister. The historical setting changes in each chapter.</p><ol><li>Read the short security briefing and study the animated map.</li><li>Listen to the military and diplomatic advisers. Their words are <strong>educational reconstructions</strong>.</li><li>Choose one of three cabinet decisions. Think about civilian safety, security and diplomacy.</li><li>Review the possible tradeoffs, then select <strong>What Really Happened?</strong> to learn the actual outcome.</li><li>After six chapters, compare your choices with history. You can save a record of your decisions.</li></ol><p><strong>Example:</strong> In 2000, you might choose to withdraw from southern Lebanon. The game will explain the potential risks and then show what Israel actually did.</p><p>No points, no countdown and no rewriting history. Each chapter takes approximately two minutes. Videos start automatically, muted. You can skip them.</p><div class="action-row"><button class="btn btn-primary" data-modal="close">UNDERSTOOD ✓</button></div>`;
- if(type==='sources')content=`<span class="section-kicker">RESEARCH &amp; IMAGE CREDITS</span><h2>SOURCES &amp; CREDITS</h2><p>The historical record draws on UN documentation, institutional research, and a supplied StandWithUs UK presentation. The choices and adviser dialogue are educational reconstructions.</p><div class="reveal-links">${listSources(Object.keys(SOURCES))}</div><p><strong>Map assets:</strong> the four maps supplied for this activity. They are illustrative, and movement markers are schematic.</p><p><strong>Archive images and videos:</strong> supplied for this activity or extracted from the Northern Arrows presentation. The media includes third party news footage. Some source slides contain third party photographs or news imagery. Publication permission must be checked before deploying the images to a public website.</p><p><strong>Branding:</strong> StandWithUs UK and Explore artwork supplied from the user’s prior materials.</p><div class="action-row"><button class="btn btn-primary" data-modal="close">CLOSE</button></div>`;
- if(type==='video'){const clip=VIDEO_CLIPS[chapter().year];if(!clip)return; const inline=$('.autoplay-archive');if(inline)inline.pause();if(state.sound)stopAmbience();content=`<span class="section-kicker">OPTIONAL HISTORICAL FOOTAGE</span><h2>${escapeHTML(clip.title)}</h2><div class="modal-video"><video controls autoplay playsinline preload="auto" poster="assets/media/${clip.poster}" aria-label="Historical news footage"><source src="assets/media/${clip.file}" type="video/mp4">Your browser does not support video.</video></div><p>${escapeHTML(clip.summary)}</p><p class="small-muted">${escapeHTML(clip.credit)}. Video editing is for classroom duration. The full video is not included. Confirm copyright permission for public upload.</p><div class="action-row"><button class="btn btn-primary" data-modal="close">RETURN TO CABINET</button></div>`;}
+ if(type==='sources')content=`<span class="section-kicker">RESEARCH &amp; IMAGE CREDITS</span><h2>SOURCES &amp; CREDITS</h2><p>The historical record draws on UN documentation, institutional research, and a supplied StandWithUs UK presentation. The choices and adviser dialogue are educational reconstructions.</p><div class="reveal-links">${listSources(Object.keys(SOURCES))}</div><p><strong>Map assets:</strong> the four maps supplied for this activity. They are illustrative, and movement markers are schematic.</p><p><strong>Archive images and videos:</strong> supplied for this activity or extracted from the Northern Arrows presentation. The media includes third party news footage. Some source slides contain third party photographs or news imagery. Publication permission has been granted for the supplied activity media.</p><p><strong>Branding:</strong> StandWithUs UK and Explore artwork supplied from the user’s prior materials.</p><div class="action-row"><button class="btn btn-primary" data-modal="close">CLOSE</button></div>`;
+ if(type==='video'){const clip=VIDEO_CLIPS[chapter().year];if(!clip)return; const inline=$('.autoplay-archive');if(inline)inline.pause();if(state.sound)stopAmbience();content=`<span class="section-kicker">OPTIONAL HISTORICAL FOOTAGE</span><h2>${escapeHTML(clip.title)}</h2><div class="modal-video"><video controls autoplay playsinline preload="auto" poster="assets/media/${clip.poster}" aria-label="Historical news footage"><source src="assets/media/${clip.file}" type="video/mp4">Your browser does not support video.</video></div><p>${escapeHTML(clip.summary)}</p><p class="small-muted">${escapeHTML(clip.credit)}. Video editing is for classroom duration. The full video is not included. This edited clip is included with permission for this activity.</p><div class="action-row"><button class="btn btn-primary" data-modal="close">RETURN TO CABINET</button></div>`;}
  if(type==='sensitive'){content=`<span class="section-kicker">CONTENT NOTICE</span><h2>ARCHIVE PHOTOGRAPH</h2><p>This historical photograph shows people carrying a covered casualty following an attack. You may choose not to view it.</p><div class="sensitive-controls"><button class="btn btn-primary" data-modal="showphoto">SHOW THE PHOTOGRAPH</button><button class="btn" data-modal="close">SKIP PHOTO</button></div><div id="sensitiveImage"></div>`;}
  if(type==='restart')content=`<span class="section-kicker">RESET ALL DECISIONS</span><h2>RESTART THE GAME?</h2><p>This will clear your current cabinet record and return to the welcome screen.</p><div class="action-row"><button class="btn btn-gold" data-modal="confirmrestart">YES, RESTART</button><button class="btn" data-modal="close">KEEP PLAYING</button></div>`;
  modal.innerHTML=`<div class="dialog" role="dialog" aria-modal="true" aria-label="${type==='howto'?'How to play':type==='restart'?'Restart game':type==='video'?'Historical video':type==='sensitive'?'Historical photo':'Sources and credits'}"><button type="button" class="close-modal" aria-label="Close dialogue" data-modal="close">×</button>${content}</div>`;
  if(type==='video'){const clipPlayer=$('video',modal);if(clipPlayer){clipPlayer.muted=false;const attempt=clipPlayer.play();if(attempt&&typeof attempt.catch==='function')attempt.catch(()=>{clipPlayer.muted=true;clipPlayer.play().catch(()=>{});});}}
  $('.close-modal',modal).focus();state.modal=type;document.body.style.overflow='hidden';}
 function closeModal(){const video=$('#modalRoot video');if(video){video.pause();video.removeAttribute('src');} const hadVideo=state.modal==='video';state.modal=null;$('#modalRoot').innerHTML='';document.body.style.overflow='';if(lastFocus && lastFocus.isConnected)lastFocus.focus();if(hadVideo&&state.sound)startAmbience();if(hadVideo&&state.screen==='intro'){const inline=$('.autoplay-archive');if(inline){const p=inline.play();if(p&&typeof p.catch==='function')p.catch(()=>{});}}}
-function setScreen(s){state.screen=s;state.cue=0;state.mapOverlay=false;state.mapAmal=false;render();}
+function setScreen(s){state.screen=s;state.cue=0;syncCueMode();render();}
 function restart(){closeModal();state.chapter=0;state.chosen={};state.player='';setScreen('welcome');}
 function soundToggle(){state.sound=!state.sound;const button=$('#soundToggle');button.setAttribute('aria-pressed',String(state.sound));$('.sound-word',button).textContent=state.sound?'SOUND ON':'SOUND OFF';if(state.sound)startAmbience();else stopAmbience();}
 function startAmbience(){try{const AudioContext=window.AudioContext||window.webkitAudioContext;if(!AudioContext)return;if(!audioCtx)audioCtx=new AudioContext();audioCtx.resume();if(oscillators.length)return;const master=audioCtx.createGain();master.gain.value=.015;master.connect(audioCtx.destination);const notes=[65.41,98.0];notes.forEach((freq,i)=>{const osc=audioCtx.createOscillator(),gain=audioCtx.createGain();osc.type=i?'sine':'triangle';osc.frequency.value=freq;gain.gain.value=i?.18:.42;osc.connect(gain);gain.connect(master);osc.start();oscillators.push(osc)});}catch(e){console.warn('Audio unavailable',e);}}
@@ -301,7 +411,7 @@ function handleAction(action,el){
   case 'rethink':setScreen('cabinet');break;
   case 'reveal':setScreen('reveal');break;
   case 'advance':{if(state.chapter<CHAPTERS.length-1){state.chapter++;setScreen('intro')}else setScreen('final');break;}
-  case 'nextcue':state.cue=(state.cue+1)%chapter().mapCues.length;render();break;
+  case 'nextcue':state.cue=(state.cue+1)%chapter().mapCues.length;syncCueMode();render();break;
   case 'mapbase':setMapMode('mapbase');break;
   case 'maporg':setMapMode('maporg');break;
   case 'mapamal':setMapMode('mapamal');break;

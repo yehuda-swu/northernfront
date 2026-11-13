@@ -28,7 +28,12 @@
 /* Arrows illustrate the overall direction of a historical development, not troop positions. */
 .map-routes{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;overflow:visible}
 .map-routes path{fill:none;stroke:#ecb979;stroke-width:3;stroke-linecap:round;stroke-dasharray:10 9;filter:drop-shadow(0 0 7px #ffd797);animation:routeFlow 14s linear infinite}
-.map-routes path.return{stroke:#9fdef5;filter:drop-shadow(0 0 7px #66cfff)}
+.map-routes path.return,.map-routes path.withdraw{stroke:#9fdef5;filter:drop-shadow(0 0 7px #66cfff)}
+.map-routes path.incursion{stroke:#f5d080;stroke-width:3.3;stroke-dasharray:12 9;filter:drop-shadow(0 0 9px #f4c96b)}
+.map-routes path.attack{stroke:#ff807b;stroke-width:3.1;stroke-dasharray:8 8;filter:drop-shadow(0 0 9px #ff7f7f)}
+.map-routes path.push{stroke:#f5d080;stroke-width:3.6;stroke-dasharray:15 9;filter:drop-shadow(0 0 9px #f4d27b)}
+.map-routes path.push-strong{stroke:#ffd19a;stroke-width:4.2;stroke-dasharray:18 10;filter:drop-shadow(0 0 11px #ffd9a5)}
+.map-routes path.presence{stroke:#8fe0b4;stroke-width:3;stroke-dasharray:5 9;filter:drop-shadow(0 0 8px #86d9b0)}
 .map-routes circle{fill:#f5ddae;stroke:#0b1622;stroke-width:2;animation:blink 2.8s infinite}
 @keyframes routeFlow{to{stroke-dashoffset:-190}}
 /* Dim boardroom setting behind the live cabinet interface. */
