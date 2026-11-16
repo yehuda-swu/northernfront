@@ -180,105 +180,106 @@ const CHAPTER_IMAGE_OVERRIDES={
 const INTEL_SCENES={
   '1978':[
     {mode:'org',markers:[
-      {x:42,y:30,label:'PLO BASES',tone:'red'},{x:45,y:48,label:'CROSS-BORDER INCURSION',tone:'gold'},{x:51,y:63,label:'ISRAEL',tone:'blue'}],
+      {x:42.5,y:43.5,label:'PLO BASES',tone:'red'},{x:43.6,y:52.2,label:'CROSS-BORDER INCURSIONS',tone:'gold'}],
       routes:[
-        {d:'M 395 250 Q 405 315 440 360',className:'incursion'},
-        {d:'M 430 220 Q 440 300 470 350',className:'incursion'}]},
+        {d:'M 418 300 Q 430 334 441 366',className:'incursion'},
+        {d:'M 447 286 Q 458 330 474 362',className:'incursion'}]},
     {mode:'org',markers:[
-      {x:48,y:62,label:'AVIVIM',tone:'red'},{x:45.5,y:58.5,label:'KIRYAT SHMONA',tone:'red'},{x:43.3,y:65.5,label:'MAALOT',tone:'red'}],
+      {x:43.2,y:55.8,label:'AVIVIM',tone:'red'},{x:45.2,y:57.4,label:'KIRYAT SHMONA',tone:'red'},{x:40.8,y:61.3,label:'MAALOT',tone:'red'}],
       routes:[
-        {d:'M 405 255 Q 420 315 457 352',className:'attack'},
-        {d:'M 390 270 Q 405 330 430 380',className:'attack'},
-        {d:'M 420 260 Q 445 330 490 366',className:'attack'}]},
+        {d:'M 414 302 Q 425 335 437 360',className:'attack'},
+        {d:'M 444 294 Q 456 335 463 372',className:'attack'},
+        {d:'M 402 314 Q 407 350 418 388',className:'attack'}]},
     {mode:'org',markers:[
-      {x:44,y:54,label:'IDF ADVANCE',tone:'gold'},{x:47,y:36,label:'LITANI LINE',tone:'blue'},{x:52,y:14,label:'TOWARDS BEIRUT',tone:'red'}],
+      {x:43.8,y:54.2,label:'IDF ADVANCE',tone:'gold'},{x:41.7,y:31.8,label:'LITANI LINE',tone:'blue'},{x:37.8,y:15.4,label:'BEIRUT',tone:'red'}],
       routes:[
-        {d:'M 442 392 Q 430 332 445 270 T 488 150',className:'push'},
-        {d:'M 410 410 Q 410 335 425 280 T 470 175',className:'push'}]}
+        {d:'M 438 392 Q 430 338 426 288 T 414 182',className:'push'},
+        {d:'M 416 404 Q 410 344 408 292 T 398 196',className:'push'}]}
   ],
   '1982':[
     {mode:'org',markers:[
-      {x:46,y:53,label:'BORDER FIGHTING',tone:'gold'},{x:48,y:34,label:'PLO POSITIONS',tone:'red'},{x:54,y:67,label:'GALILEE TOWNS',tone:'blue'}],
+      {x:43.9,y:55.4,label:'BORDER FIGHTING',tone:'gold'},{x:42.7,y:39.5,label:'PLO POSITIONS',tone:'red'},{x:44.7,y:61.2,label:'GALILEE TOWNS',tone:'blue'}],
       routes:[
-        {d:'M 398 240 Q 418 312 458 386',className:'incursion'},
-        {d:'M 430 245 Q 446 318 486 392',className:'incursion'}]},
+        {d:'M 418 292 Q 432 334 448 374',className:'incursion'},
+        {d:'M 438 278 Q 450 326 468 376',className:'incursion'}]},
     {mode:'org',markers:[
-      {x:43.5,y:58,label:'INVASION ROUTES',tone:'gold'},{x:46,y:43,label:'TYRE / SIDON AXIS',tone:'blue'},{x:51,y:30,label:'PLO STRONGHOLDS',tone:'red'}],
+      {x:43.8,y:58.0,label:'INVASION ROUTES',tone:'gold'},{x:39.2,y:34.4,label:'TYRE',tone:'blue'},{x:39.9,y:25.6,label:'SIDON',tone:'blue'}],
       routes:[
-        {d:'M 438 405 Q 435 350 440 290 T 455 210',className:'push'},
-        {d:'M 468 405 Q 468 340 474 275 T 490 200',className:'push'}]},
+        {d:'M 430 400 Q 418 350 410 308 T 402 245',className:'push'},
+        {d:'M 456 396 Q 444 338 434 286 T 420 220',className:'push'}]},
     {mode:'org',markers:[
-      {x:52,y:13,label:'BEIRUT',tone:'red'},{x:48,y:28,label:'ADVANCE NORTH',tone:'gold'},{x:44,y:58,label:'START LINE',tone:'blue'}],
+      {x:37.8,y:15.4,label:'BEIRUT',tone:'red'},{x:41.1,y:28.2,label:'ADVANCE NORTH',tone:'gold'},{x:43.7,y:57.8,label:'START LINE',tone:'blue'}],
       routes:[
-        {d:'M 448 392 Q 455 310 470 235 T 505 90',className:'push-strong'}]}
+        {d:'M 446 394 Q 430 326 416 260 T 392 118',className:'push-strong'}]}
   ],
   '1993':[
     {mode:'amal',markers:[
-      {x:44,y:39,label:'SOUTH LEBANON',tone:'gold'},{x:47,y:32,label:'HEZBOLLAH RISES',tone:'red'},{x:41,y:24,label:'AMAL CONTEXT',tone:'blue'}],
+      {x:41.8,y:40.8,label:'HEZBOLLAH STRONGHOLDS',tone:'red'},{x:39.8,y:32.2,label:'AMAL CONTEXT',tone:'blue'},{x:43.2,y:48.8,label:'SOUTH LEBANON',tone:'gold'}],
       routes:[
-        {d:'M 430 260 Q 448 255 472 240',className:'presence'}]},
+        {d:'M 402 265 Q 417 258 438 250',className:'presence'}]},
     {mode:'org',markers:[
-      {x:52,y:67,label:'NORTHERN ISRAEL',tone:'blue'},{x:46,y:46,label:'ROCKET FIRE',tone:'red'},{x:44,y:58,label:'BORDER',tone:'gold'}],
+      {x:45.1,y:57.4,label:'KIRYAT SHMONA',tone:'blue'},{x:40.0,y:60.8,label:'WESTERN GALILEE',tone:'blue'},{x:42.2,y:45.6,label:'ROCKET FIRE',tone:'red'}],
       routes:[
-        {d:'M 430 255 Q 450 330 505 395',className:'attack'},
-        {d:'M 455 245 Q 475 325 548 380',className:'attack'}]},
+        {d:'M 420 270 Q 432 322 462 370',className:'attack'},
+        {d:'M 410 280 Q 405 340 410 392',className:'attack'}]},
     {mode:'org',markers:[
-      {x:45,y:56,label:'ISRAELI STRIKES',tone:'gold'},{x:47,y:38,label:'HEZBOLLAH AREAS',tone:'red'},{x:54,y:48,label:'DISPLACEMENT PRESSURE',tone:'blue'}],
+      {x:43.2,y:54.5,label:'ISRAELI STRIKES',tone:'gold'},{x:41.9,y:40.1,label:'HEZBOLLAH AREAS',tone:'red'},{x:39.8,y:29.4,label:'DISPLACEMENT PRESSURE',tone:'blue'}],
       routes:[
-        {d:'M 470 385 Q 455 330 446 278 T 435 215',className:'push'},
-        {d:'M 500 388 Q 485 330 472 275 T 455 220',className:'push'}]}
+        {d:'M 455 388 Q 440 334 426 286 T 412 224',className:'push'},
+        {d:'M 428 386 Q 416 338 406 294 T 395 236',className:'push'}]}
   ],
   '2000':[
     {mode:'org',markers:[
-      {x:46,y:42,label:'SECURITY ZONE',tone:'gold'},{x:43,y:56,label:'IDF POSITIONS',tone:'blue'},{x:52,y:33,label:'HEZBOLLAH',tone:'red'}],
+      {x:42.3,y:44.0,label:'SECURITY ZONE',tone:'gold'},{x:43.7,y:54.8,label:'IDF POSITIONS',tone:'blue'},{x:41.8,y:36.3,label:'HEZBOLLAH',tone:'red'}],
       routes:[
-        {d:'M 420 388 Q 430 338 435 292 T 440 225',className:'presence'}]},
+        {d:'M 430 384 Q 426 336 421 294 T 417 236',className:'presence'}]},
     {mode:'org',markers:[
-      {x:44,y:56,label:'WITHDRAWAL',tone:'gold'},{x:47,y:49,label:'SLA COLLAPSE',tone:'red'},{x:42,y:61,label:'BLUE LINE',tone:'blue'}],
+      {x:43.3,y:53.9,label:'WITHDRAWAL',tone:'gold'},{x:44.8,y:48.2,label:'SLA COLLAPSE',tone:'red'},{x:42.5,y:57.0,label:'BLUE LINE',tone:'blue'}],
       routes:[
-        {d:'M 442 230 Q 432 286 408 340 T 360 420',className:'withdraw'}]},
+        {d:'M 418 236 Q 420 286 422 328 T 436 388',className:'withdraw'}]},
     {mode:'org',markers:[
-      {x:42,y:61,label:'ISRAELI BORDER',tone:'blue'},{x:47,y:43,label:'FORMER ZONE',tone:'gold'},{x:49,y:34,label:'HEZBOLLAH PRESENCE',tone:'red'}],
+      {x:42.5,y:57.0,label:'ISRAELI BORDER',tone:'blue'},{x:42.4,y:44.1,label:'FORMER ZONE',tone:'gold'},{x:41.9,y:35.9,label:'HEZBOLLAH PRESENCE',tone:'red'}],
       routes:[
-        {d:'M 444 220 Q 432 290 405 345 T 360 417',className:'withdraw'},
-        {d:'M 470 200 Q 458 248 448 300',className:'presence'}]}
+        {d:'M 420 236 Q 420 286 423 330 T 436 390',className:'withdraw'},
+        {d:'M 408 218 Q 412 252 416 292',className:'presence'}]}
   ],
   '2006':[
     {mode:'org',markers:[
-      {x:43,y:55,label:'BORDER RAID',tone:'gold'},{x:46,y:46,label:'HEZBOLLAH',tone:'red'},{x:51,y:67,label:'ISRAELI PATROL AREA',tone:'blue'}],
+      {x:42.4,y:55.3,label:'BORDER RAID',tone:'gold'},{x:42.0,y:45.9,label:'HEZBOLLAH',tone:'red'},{x:43.5,y:58.8,label:'PATROL AREA',tone:'blue'}],
       routes:[
-        {d:'M 430 255 Q 440 320 470 380',className:'attack'},
-        {d:'M 455 260 Q 460 325 490 385',className:'incursion'}]},
+        {d:'M 414 274 Q 424 320 438 360',className:'attack'},
+        {d:'M 424 270 Q 432 318 446 372',className:'incursion'}]},
     {mode:'org',markers:[
-      {x:54,y:66,label:'HAIFA',tone:'red'},{x:49.8,y:63.2,label:'KIRYAT SHMONA',tone:'red'},{x:46,y:60,label:'NAHARIYA',tone:'red'}],
+      {x:39.8,y:69.2,label:'HAIFA',tone:'red'},{x:45.2,y:57.4,label:'KIRYAT SHMONA',tone:'red'},{x:39.8,y:60.7,label:'NAHARIYA',tone:'red'}],
       routes:[
-        {d:'M 428 248 Q 455 325 520 402',className:'attack'},
-        {d:'M 448 240 Q 480 330 565 392',className:'attack'},
-        {d:'M 468 236 Q 500 325 615 404',className:'attack'}]},
+        {d:'M 410 274 Q 430 336 444 372',className:'attack'},
+        {d:'M 404 286 Q 398 344 404 394',className:'attack'},
+        {d:'M 425 270 Q 420 350 408 444',className:'attack'}]},
     {mode:'org',markers:[
-      {x:46,y:52,label:'GROUND OFFENSIVE',tone:'gold'},{x:49,y:33,label:'LITANI AREA',tone:'blue'},{x:41,y:61,label:'UN 1701 / BLUE LINE',tone:'red'}],
+      {x:42.9,y:53.5,label:'GROUND OFFENSIVE',tone:'gold'},{x:41.7,y:30.8,label:'LITANI AREA',tone:'blue'},{x:42.5,y:57.0,label:'UN 1701 / BLUE LINE',tone:'red'}],
       routes:[
-        {d:'M 445 395 Q 448 332 458 274 T 472 195',className:'push'},
-        {d:'M 470 390 Q 476 330 485 280 T 500 212',className:'push'}]}
+        {d:'M 436 392 Q 426 338 420 292 T 414 212',className:'push'},
+        {d:'M 454 392 Q 442 332 434 280 T 426 216',className:'push'}]}
   ],
   '2024':[
     {mode:'org',markers:[
-      {x:46,y:46,label:'HEZBOLLAH FIRE',tone:'red'},{x:43,y:56,label:'BORDER COMMUNITIES',tone:'gold'},{x:52,y:67,label:'NORTHERN ISRAEL',tone:'blue'}],
+      {x:42.0,y:44.8,label:'HEZBOLLAH FIRE',tone:'red'},{x:43.5,y:56.0,label:'BORDER COMMUNITIES',tone:'gold'},{x:44.8,y:63.2,label:'NORTHERN ISRAEL',tone:'blue'}],
       routes:[
-        {d:'M 430 250 Q 450 320 500 385',className:'attack'},
-        {d:'M 452 245 Q 470 318 530 377',className:'attack'}]},
+        {d:'M 414 274 Q 430 328 454 370',className:'attack'},
+        {d:'M 426 266 Q 438 326 480 404',className:'attack'}]},
     {mode:'base',markers:[
-      {x:44.5,y:57.8,label:'METULA',tone:'red'},{x:48.3,y:61.2,label:'KIRYAT SHMONA',tone:'red'},{x:42.2,y:52.7,label:'MALKIYA',tone:'red'}],
+      {x:45.4,y:53.4,label:'METULA',tone:'red'},{x:45.2,y:57.4,label:'KIRYAT SHMONA',tone:'red'},{x:42.9,y:55.0,label:'MALKIYA',tone:'red'}],
       routes:[
-        {d:'M 430 248 Q 452 318 502 378',className:'attack'},
-        {d:'M 452 245 Q 470 314 530 372',className:'attack'}]},
+        {d:'M 414 272 Q 432 322 454 364',className:'attack'},
+        {d:'M 428 266 Q 436 324 466 370',className:'attack'}]},
     {mode:'org',markers:[
-      {x:46,y:54,label:'INTENSIFIED STRIKES',tone:'gold'},{x:48,y:36,label:'SOUTH LEBANON',tone:'red'},{x:43,y:61,label:'GROUND INCURSIONS',tone:'blue'}],
+      {x:42.6,y:54.8,label:'INTENSIFIED STRIKES',tone:'gold'},{x:41.8,y:36.5,label:'SOUTH LEBANON',tone:'red'},{x:42.9,y:57.2,label:'GROUND INCURSIONS',tone:'blue'}],
       routes:[
-        {d:'M 452 392 Q 447 334 447 280 T 446 215',className:'push-strong'},
-        {d:'M 420 394 Q 420 340 425 292 T 432 238',className:'push'}]}
+        {d:'M 430 392 Q 422 336 416 286 T 410 224',className:'push-strong'},
+        {d:'M 446 390 Q 434 334 426 286 T 420 228',className:'push'}]}
   ]
 };
+
 function chapterDisplay(c){return Object.assign({},c,CHAPTER_IMAGE_OVERRIDES[c.year]||{});}
 function getIntelScene(c){const list=INTEL_SCENES[c.year]||[];return list[state.cue]||{mode:'base',markers:c.markers||[],routes:c.route?[{d:c.route,className:c.year==='2000'?'withdraw':'push'}]:[]};}
 function renderSceneRoutes(scene){const routes=(scene.routes||[]).length?scene.routes:(scene.route?[{d:scene.route,className:'push'}]:[]);return routes.map(r=>`<path class="${escapeHTML(r.className||'push')}" d="${escapeHTML(r.d)}"></path>`).join('');}
