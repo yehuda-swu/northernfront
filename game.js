@@ -180,21 +180,21 @@ const CHAPTER_IMAGE_OVERRIDES={
 const INTEL_SCENES={
   '1978':[
     {mode:'org',markers:[
-      {x:42.5,y:43.5,label:'PLO BASES',tone:'red'},{x:43.6,y:52.2,label:'CROSS-BORDER INCURSIONS',tone:'gold'}],
+      {x:42.7,y:42.8,label:'PLO BASES',tone:'red'}],
       routes:[
-        {d:'M 418 300 Q 430 334 441 366',className:'incursion'},
-        {d:'M 447 286 Q 458 330 474 362',className:'incursion'}]},
+        {d:'M 426 286 Q 434 330 439 364',className:'incursion'},
+        {d:'M 426 286 Q 449 324 470 360',className:'incursion'}]},
     {mode:'org',markers:[
-      {x:43.2,y:55.8,label:'AVIVIM',tone:'red'},{x:45.2,y:57.4,label:'KIRYAT SHMONA',tone:'red'},{x:40.8,y:61.3,label:'MAALOT',tone:'red'}],
+      {x:43.1,y:56.2,label:'AVIVIM',tone:'red'},{x:45.5,y:54.4,label:'KIRYAT SHMONA',tone:'red'},{x:40.5,y:60.9,label:'MAALOT',tone:'red'}],
       routes:[
-        {d:'M 414 302 Q 425 335 437 360',className:'attack'},
-        {d:'M 444 294 Q 456 335 463 372',className:'attack'},
-        {d:'M 402 314 Q 407 350 418 388',className:'attack'}]},
+        {d:'M 414 302 Q 424 336 436 364',className:'attack'},
+        {d:'M 434 296 Q 446 324 466 350',className:'attack'},
+        {d:'M 398 316 Q 405 348 415 386',className:'attack'}]},
     {mode:'org',markers:[
-      {x:43.8,y:54.2,label:'IDF ADVANCE',tone:'gold'},{x:41.7,y:31.8,label:'LITANI LINE',tone:'blue'},{x:37.8,y:15.4,label:'BEIRUT',tone:'red'}],
+      {x:43.6,y:53.9,label:'IDF ADVANCE',tone:'gold'},{x:40.7,y:31.6,label:'LITANI LINE',tone:'blue'},{x:39.6,y:16.6,label:'BEIRUT',tone:'red'}],
       routes:[
-        {d:'M 438 392 Q 430 338 426 288 T 414 182',className:'push'},
-        {d:'M 416 404 Q 410 344 408 292 T 398 196',className:'push'}]}
+        {d:'M 430 390 Q 424 348 418 312 T 413 236',className:'push'},
+        {d:'M 448 388 Q 439 346 432 308 T 425 244',className:'push'}]}
   ],
   '1982':[
     {mode:'org',markers:[
