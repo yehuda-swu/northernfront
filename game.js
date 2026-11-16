@@ -362,49 +362,50 @@ const GEO_CHAPTER_MAPS={
     image:'assets/map_regional_geo.webp',bounds:REGIONAL_BOUNDS,alt:'Calibrated regional map of southern Lebanon and northern Israel for the rise of Hezbollah',
     scenes:[
       {title:'HEZBOLLAH RISES',markers:[
-        {...GEO_PLACES.nabatieh,label:'NABATIEH',tone:'red',position:'right'},
         {...GEO_PLACES.bintjbeil,label:'BINT JBEIL',tone:'red',position:'left'},
-        {...GEO_PLACES.marjayoun,label:'MARJAYOUN',tone:'blue',position:'right'}],routes:[],
-       note:'These markers identify the southern Lebanese area in which Hezbollah became a major armed actor.'},
+        {...GEO_PLACES.nabatieh,label:'NABATIEH',tone:'red',position:'right'},
+        {...GEO_PLACES.khiam,label:'KHIAM',tone:'red',position:'right'}],routes:[],
+       note:'These markers identify the main southern Lebanese belt in which Hezbollah expanded its presence.'},
       {title:'ROCKET FIRE',markers:[
+        {lat:33.20,lon:35.47,label:'HEZBOLLAH FIRE ORIGIN',tone:'red',position:'left'},
         {...GEO_PLACES.kiryat,label:'KIRYAT SHMONA',tone:'blue',position:'right'},
-        {...GEO_PLACES.nahariya,label:'NAHARIYA',tone:'blue',position:'right'},
-        {lat:33.16,lon:35.42,label:'HEZBOLLAH FIRE',tone:'red',position:'left'}],
+        {...GEO_PLACES.nahariya,label:'NAHARIYA',tone:'blue',position:'right'}],
        routes:[
-        {from:[33.16,35.42],to:[GEO_PLACES.kiryat.lat,GEO_PLACES.kiryat.lon],tone:'incursion'},
-        {from:[33.14,35.28],to:[GEO_PLACES.nahariya.lat,GEO_PLACES.nahariya.lon],tone:'incursion'}],
-       note:'The arrows are schematic and indicate rocket fire from southern Lebanon into northern Israeli towns.'},
+        {from:[33.20,35.47],to:[GEO_PLACES.kiryat.lat,GEO_PLACES.kiryat.lon],tone:'incursion'},
+        {from:[33.16,35.33],to:[GEO_PLACES.nahariya.lat,GEO_PLACES.nahariya.lon],tone:'incursion'}],
+       note:'The arrows show representative rocket fire from southern Lebanon into northern Israeli towns.'},
       {title:'ISRAELI STRIKES',markers:[
-        {...GEO_PLACES.nabatieh,label:'HEZBOLLAH AREAS',tone:'red',position:'right'},
-        {lat:33.21,lon:35.37,label:'ISRAELI STRIKES',tone:'gold',position:'left'},
-        {lat:33.52,lon:35.43,label:'DISPLACEMENT PRESSURE',tone:'blue',position:'right'}],
+        {...GEO_PLACES.bintjbeil,label:'HEZBOLLAH ZONE',tone:'red',position:'left'},
+        {...GEO_PLACES.nabatieh,label:'HEZBOLLAH ZONE',tone:'red',position:'right'},
+        {lat:33.47,lon:35.43,label:'DISPLACEMENT PRESSURE',tone:'blue',position:'right'}],
        routes:[
-        {points:[[33.09,35.33],[33.16,35.36],[33.24,35.40],[33.30,35.46]],tone:'advance'},
-        {points:[[33.15,35.50],[33.22,35.49],[33.29,35.48],[33.36,35.48]],tone:'advance'}],
-       note:'This scene shows the main southern Lebanese belt hit during Israel\'s response in 1993.'}
+        {points:[[33.08,35.28],[33.14,35.32],[33.20,35.36],[33.26,35.40]],tone:'advance'},
+        {points:[[33.11,35.49],[33.17,35.49],[33.23,35.49],[33.30,35.49]],tone:'advance'}],
+       note:'This scene shows Israeli strikes across the southern Lebanese Hezbollah belt during Operation Accountability.'}
     ]
   },
   '2000':{
     image:'assets/map_regional_geo.webp',bounds:REGIONAL_BOUNDS,alt:'Calibrated regional map of southern Lebanon and northern Israel for the Israeli withdrawal',
     scenes:[
       {title:'SECURITY ZONE',markers:[
-        {lat:33.23,lon:35.43,label:'SECURITY ZONE',tone:'gold',position:'left'},
-        {...GEO_PLACES.marjayoun,label:'IDF / SLA',tone:'blue',position:'right'},
-        {...GEO_PLACES.bintjbeil,label:'HEZBOLLAH',tone:'red',position:'left'}],routes:[],
-       note:'The security zone is shown as the belt of southern Lebanon held by Israel and the South Lebanon Army before 2000.'},
+        {...GEO_PLACES.bintjbeil,label:'WESTERN SECTOR',tone:'gold',position:'left'},
+        {...GEO_PLACES.marjayoun,label:'EASTERN SECTOR',tone:'gold',position:'right'},
+        {lat:33.23,lon:35.46,label:'IDF / SLA ZONE',tone:'blue',position:'left'}],routes:[],
+       note:'The security zone is shown as the belt of southern Lebanon still held by Israel and the South Lebanon Army before the pullback.'},
       {title:'WITHDRAWAL',markers:[
-        {lat:33.20,lon:35.42,label:'WITHDRAWAL',tone:'gold',position:'left'},
-        {...GEO_PLACES.metula,label:'BLUE LINE',tone:'blue',position:'right'},
-        {...GEO_PLACES.marjayoun,label:'SLA COLLAPSE',tone:'red',position:'left'}],
+        {...GEO_PLACES.marjayoun,label:'PULLBACK BEGINS',tone:'gold',position:'right'},
+        {...GEO_PLACES.metula,label:'METULA',tone:'blue',position:'right'},
+        {...GEO_PLACES.malkiya,label:'MALKIYA',tone:'blue',position:'left'}],
        routes:[
-        {points:[[33.23,35.45],[33.20,35.48],[33.17,35.52],[33.12,35.55],[GEO_PLACES.metula.lat,GEO_PLACES.metula.lon]],tone:'advance'},
-        {points:[[33.18,35.37],[33.15,35.43],[33.12,35.47],[GEO_PLACES.malkiya.lat,GEO_PLACES.malkiya.lon]],tone:'advance'}],
-       note:'The arrows show the southward pullback into Israel in May 2000.'},
+        {points:[[33.36,35.59],[33.32,35.58],[33.30,35.58],[33.28,35.579]],tone:'advance'},
+        {points:[[33.22,35.48],[33.18,35.50],[33.14,35.53],[33.09833,35.51111]],tone:'advance'},
+        {points:[[33.14,35.33],[33.12,35.27],[33.10,35.20],[33.08610,35.11030]],tone:'advance'}],
+       note:'The arrows show a clearer southward IDF and SLA pullback from the security zone back to the Israeli border in May 2000.'},
       {title:'AFTER THE WITHDRAWAL',markers:[
         {...GEO_PLACES.metula,label:'ISRAELI BORDER',tone:'blue',position:'right'},
-        {lat:33.23,lon:35.44,label:'FORMER SECURITY ZONE',tone:'gold',position:'left'},
-        {...GEO_PLACES.bintjbeil,label:'HEZBOLLAH PRESENCE',tone:'red',position:'left'}],routes:[],
-       note:'After the withdrawal, Hezbollah remained active in the former security-zone area just north of the border.'}
+        {...GEO_PLACES.khiam,label:'HEZBOLLAH NEAR BORDER',tone:'red',position:'right'},
+        {...GEO_PLACES.bintjbeil,label:'FORMER SECURITY ZONE',tone:'gold',position:'left'}],routes:[],
+       note:'After the withdrawal, Hezbollah remained active close to the border and in the former security-zone area.'}
     ]
   },
   '2006':{
@@ -412,7 +413,7 @@ const GEO_CHAPTER_MAPS={
     scenes:[
       {title:'BORDER RAID',markers:[
         {...GEO_PLACES.zarit,label:'ZARIT SECTOR',tone:'gold',position:'right'},
-        {lat:33.122,lon:35.402,label:'HEZBOLLAH POSITIONS',tone:'red',position:'left'},
+        {lat:33.122,lon:35.402,label:'HEZBOLLAH BORDER POSITION',tone:'red',position:'left'},
         {lat:33.09,lon:35.27,label:'PATROL AREA',tone:'blue',position:'left'}],
        routes:[
         {points:[[33.122,35.402],[33.11,35.35],[33.09,35.29],[33.072,35.24]],tone:'incursion'}],
@@ -441,13 +442,13 @@ const GEO_CHAPTER_MAPS={
     image:'assets/map_regional_geo.webp',bounds:REGIONAL_BOUNDS,alt:'Calibrated regional map of southern Lebanon and northern Israel for Operation Northern Arrows',
     scenes:[
       {title:'HEZBOLLAH FIRE',markers:[
-        {...GEO_PLACES.khiam,label:'KHIAM / FIRE ORIGIN',tone:'red',position:'right'},
+        {...GEO_PLACES.khiam,label:'HEZBOLLAH FIRE ORIGIN',tone:'red',position:'right'},
         {...GEO_PLACES.metula,label:'METULA',tone:'blue',position:'right'},
         {...GEO_PLACES.kiryat,label:'KIRYAT SHMONA',tone:'blue',position:'right'}],
        routes:[
         {from:[GEO_PLACES.khiam.lat,GEO_PLACES.khiam.lon],to:[GEO_PLACES.metula.lat,GEO_PLACES.metula.lon],tone:'incursion'},
-        {from:[33.17,35.46],to:[GEO_PLACES.kiryat.lat,GEO_PLACES.kiryat.lon],tone:'incursion'}],
-       note:'This scene shows representative attack vectors from southern Lebanon into northern Israeli communities.'},
+        {from:[33.19,35.50],to:[GEO_PLACES.kiryat.lat,GEO_PLACES.kiryat.lon],tone:'incursion'}],
+       note:'This scene shows representative Hezbollah attack vectors from southern Lebanon into northern Israeli communities.'},
       {title:'EVACUATED COMMUNITIES',markers:[
         {...GEO_PLACES.metula,label:'METULA',tone:'red',position:'right'},
         {...GEO_PLACES.kiryat,label:'KIRYAT SHMONA',tone:'red',position:'right'},
