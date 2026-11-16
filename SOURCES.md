@@ -34,8 +34,9 @@ Hezbollah emerged in the early 1980s with Iranian support, distinct from the Ama
 
 * UNIFIL background: https://unifil.unmissions.org/en/background
 * UNIFIL Blue Line and operations: https://unifil.unmissions.org/en/unifil-operations
+* UN Secretary General report confirming withdrawal, 16 June 2000: https://unifil.unmissions.org/sites/default/files/590.3224fd6b-b9a2-4727-9f55-fdd403f66673.pdf
 
-The Blue Line is a withdrawal verification line drawn by the UN. It is not the same as a bilaterally agreed international border.
+The Blue Line is a withdrawal verification line drawn by the UN. It is not the same as a bilaterally agreed international border. The animated 2000 withdrawal arrows and shaded security zone are educational sketches. They are not exact route records, certified boundaries or troop position data.
 
 ### Chapter 05: Second Lebanon War, 2006
 

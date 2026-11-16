@@ -367,16 +367,16 @@ const GEO_CHAPTER_MAPS={
         {...GEO_PLACES.khiam,label:'KHIAM',tone:'red',position:'right'}],routes:[],
        note:'These markers identify the main southern Lebanese belt in which Hezbollah expanded its presence.'},
       {title:'ROCKET FIRE',markers:[
-        {lat:33.20,lon:35.47,label:'HEZBOLLAH FIRE ORIGIN',tone:'red',position:'left'},
+        {lat:33.20,lon:35.47,label:'HEZBOLLAH FIRE',tone:'red',position:'left'},
         {...GEO_PLACES.kiryat,label:'KIRYAT SHMONA',tone:'blue',position:'right'},
         {...GEO_PLACES.nahariya,label:'NAHARIYA',tone:'blue',position:'right'}],
        routes:[
         {from:[33.20,35.47],to:[GEO_PLACES.kiryat.lat,GEO_PLACES.kiryat.lon],tone:'incursion'},
-        {from:[33.16,35.33],to:[GEO_PLACES.nahariya.lat,GEO_PLACES.nahariya.lon],tone:'incursion'}],
+        {from:[33.20,35.47],to:[GEO_PLACES.nahariya.lat,GEO_PLACES.nahariya.lon],tone:'incursion'}],
        note:'The arrows show representative rocket fire from southern Lebanon into northern Israeli towns.'},
       {title:'ISRAELI STRIKES',markers:[
-        {...GEO_PLACES.bintjbeil,label:'HEZBOLLAH ZONE',tone:'red',position:'left'},
-        {...GEO_PLACES.nabatieh,label:'HEZBOLLAH ZONE',tone:'red',position:'right'},
+        {...GEO_PLACES.bintjbeil,label:'BINT JBEIL AREA',tone:'red',position:'left'},
+        {...GEO_PLACES.nabatieh,label:'NABATIEH AREA',tone:'red',position:'right'},
         {lat:33.47,lon:35.43,label:'DISPLACEMENT PRESSURE',tone:'blue',position:'right'}],
        routes:[
         {points:[[33.08,35.28],[33.14,35.32],[33.20,35.36],[33.26,35.40]],tone:'advance'},
@@ -385,27 +385,31 @@ const GEO_CHAPTER_MAPS={
     ]
   },
   '2000':{
-    image:'assets/map_regional_geo.webp',bounds:REGIONAL_BOUNDS,alt:'Calibrated regional map of southern Lebanon and northern Israel for the Israeli withdrawal',
+    image:'assets/map_regional_geo.webp',bounds:REGIONAL_BOUNDS,alt:'Calibrated map of Lebanon and northern Israel showing the security zone and the 2000 Israeli withdrawal',
     scenes:[
-      {title:'SECURITY ZONE',markers:[
-        {...GEO_PLACES.bintjbeil,label:'WESTERN SECTOR',tone:'gold',position:'left'},
-        {...GEO_PLACES.marjayoun,label:'EASTERN SECTOR',tone:'gold',position:'right'},
-        {lat:33.23,lon:35.46,label:'IDF / SLA ZONE',tone:'blue',position:'left'}],routes:[],
-       note:'The security zone is shown as the belt of southern Lebanon still held by Israel and the South Lebanon Army before the pullback.'},
-      {title:'WITHDRAWAL',markers:[
-        {...GEO_PLACES.marjayoun,label:'PULLBACK BEGINS',tone:'gold',position:'right'},
-        {...GEO_PLACES.metula,label:'METULA',tone:'blue',position:'right'},
-        {...GEO_PLACES.malkiya,label:'MALKIYA',tone:'blue',position:'left'}],
+      {title:'BEFORE WITHDRAWAL',phase:'BEFORE WITHDRAWAL',zone:'full',blueLine:true,
+       markers:[
+        {lat:33.245,lon:35.365,label:'SECURITY ZONE',tone:'gold',position:'above'},
+        {...GEO_PLACES.metula,label:'METULA',tone:'blue',position:'right'}],
+       routes:[],
+       note:'Amber shading shows the approximate Israeli and South Lebanon Army security zone before May 2000. The blue line is schematic.'},
+      {title:'IDF WITHDRAWAL',phase:'MAY 2000 · IDF WITHDRAWAL',zone:'fading',blueLine:true,
+       markers:[
+        {...GEO_PLACES.roshhanikra,label:'ROSH HANIKRA',tone:'blue',position:'left'},
+        {...GEO_PLACES.malkiya,label:'MALKIYA',tone:'blue',position:'below'},
+        {...GEO_PLACES.metula,label:'METULA',tone:'blue',position:'right'}],
        routes:[
-        {points:[[33.36,35.59],[33.32,35.58],[33.30,35.58],[33.28,35.579]],tone:'advance'},
-        {points:[[33.22,35.48],[33.18,35.50],[33.14,35.53],[33.09833,35.51111]],tone:'advance'},
-        {points:[[33.14,35.33],[33.12,35.27],[33.10,35.20],[33.08610,35.11030]],tone:'advance'}],
-       note:'The arrows show a clearer southward IDF and SLA pullback from the security zone back to the Israeli border in May 2000.'},
-      {title:'AFTER THE WITHDRAWAL',markers:[
-        {...GEO_PLACES.metula,label:'ISRAELI BORDER',tone:'blue',position:'right'},
-        {...GEO_PLACES.khiam,label:'HEZBOLLAH NEAR BORDER',tone:'red',position:'right'},
-        {...GEO_PLACES.bintjbeil,label:'FORMER SECURITY ZONE',tone:'gold',position:'left'}],routes:[],
-       note:'After the withdrawal, Hezbollah remained active close to the border and in the former security-zone area.'}
+        {points:[[33.225,35.25],[33.184,35.214],[33.145,35.17],[GEO_PLACES.roshhanikra.lat,GEO_PLACES.roshhanikra.lon]],tone:'withdrawal'},
+        {points:[[33.255,35.425],[33.202,35.456],[33.150,35.486],[GEO_PLACES.malkiya.lat,GEO_PLACES.malkiya.lon]],tone:'withdrawal'},
+        {points:[[33.372,35.611],[33.334,35.606],[33.303,35.590],[GEO_PLACES.metula.lat,GEO_PLACES.metula.lon]],tone:'withdrawal'}],
+       note:'Three animated arrows show illustrative Israeli withdrawal corridors into Israel. They are not verified unit routes.'},
+      {title:'AFTER THE WITHDRAWAL',phase:'AFTER THE WITHDRAWAL',zone:'outline',blueLine:true,
+       markers:[
+        {...GEO_PLACES.bintjbeil,label:'BINT JBEIL AREA',tone:'red',position:'left'},
+        {...GEO_PLACES.khiam,label:'KHIAM AREA',tone:'red',position:'right'},
+        {...GEO_PLACES.metula,label:'METULA',tone:'blue',position:'left'}],
+       routes:[],
+       note:'The old security zone is no longer held by Israel. Red dots indicate areas of Hezbollah presence, not exact bases. The UN confirmed Israeli withdrawal in June 2000.'}
     ]
   },
   '2006':{
@@ -413,8 +417,7 @@ const GEO_CHAPTER_MAPS={
     scenes:[
       {title:'BORDER RAID',markers:[
         {...GEO_PLACES.zarit,label:'ZARIT SECTOR',tone:'gold',position:'right'},
-        {lat:33.122,lon:35.402,label:'HEZBOLLAH BORDER POSITION',tone:'red',position:'left'},
-        {lat:33.09,lon:35.27,label:'PATROL AREA',tone:'blue',position:'left'}],
+        {lat:33.122,lon:35.402,label:'HEZBOLLAH AREA',tone:'red',position:'right'}],
        routes:[
         {points:[[33.122,35.402],[33.11,35.35],[33.09,35.29],[33.072,35.24]],tone:'incursion'}],
        note:'This schematic scene shows the cross-border raid area that sparked the 2006 war.'},
@@ -430,7 +433,7 @@ const GEO_CHAPTER_MAPS={
       {title:'GROUND OFFENSIVE',markers:[
         {lat:33.18,lon:35.41,label:'GROUND OFFENSIVE',tone:'gold',position:'left'},
         {lat:33.34,lon:35.39,label:'LITANI LINE',tone:'blue',position:'above'},
-        {...GEO_PLACES.metula,label:'UN 1701 / BORDER',tone:'red',position:'right'}],
+        {...GEO_PLACES.metula,label:'METULA / BORDER',tone:'blue',position:'right'}],
        routes:[
         {points:[[33.10,35.27],[33.16,35.30],[33.22,35.33],[33.30,35.36]],tone:'advance'},
         {points:[[33.12,35.49],[33.19,35.46],[33.25,35.43],[33.31,35.40]],tone:'advance'}],
@@ -442,12 +445,12 @@ const GEO_CHAPTER_MAPS={
     image:'assets/map_regional_geo.webp',bounds:REGIONAL_BOUNDS,alt:'Calibrated regional map of southern Lebanon and northern Israel for Operation Northern Arrows',
     scenes:[
       {title:'HEZBOLLAH FIRE',markers:[
-        {...GEO_PLACES.khiam,label:'HEZBOLLAH FIRE ORIGIN',tone:'red',position:'right'},
-        {...GEO_PLACES.metula,label:'METULA',tone:'blue',position:'right'},
-        {...GEO_PLACES.kiryat,label:'KIRYAT SHMONA',tone:'blue',position:'right'}],
+        {...GEO_PLACES.khiam,label:'KHIAM AREA',tone:'red',position:'right'},
+        {...GEO_PLACES.metula,label:'METULA',tone:'blue',position:'above'},
+        {...GEO_PLACES.kiryat,label:'KIRYAT SHMONA',tone:'blue',position:'left'}],
        routes:[
         {from:[GEO_PLACES.khiam.lat,GEO_PLACES.khiam.lon],to:[GEO_PLACES.metula.lat,GEO_PLACES.metula.lon],tone:'incursion'},
-        {from:[33.19,35.50],to:[GEO_PLACES.kiryat.lat,GEO_PLACES.kiryat.lon],tone:'incursion'}],
+        {from:[GEO_PLACES.khiam.lat,GEO_PLACES.khiam.lon],to:[GEO_PLACES.kiryat.lat,GEO_PLACES.kiryat.lon],tone:'incursion'}],
        note:'This scene shows representative Hezbollah attack vectors from southern Lebanon into northern Israeli communities.'},
       {title:'EVACUATED COMMUNITIES',markers:[
         {...GEO_PLACES.metula,label:'METULA',tone:'red',position:'right'},
@@ -465,17 +468,43 @@ const GEO_CHAPTER_MAPS={
     ]
   }
 };
+// These line and area features are explicitly schematic, not exact cadastral boundaries.
+const SECURITY_ZONE_2000=[
+  [33.090,35.133],[33.160,35.176],[33.234,35.241],[33.285,35.352],
+  [33.315,35.475],[33.397,35.616],[33.292,35.610],[33.247,35.541],
+  [33.161,35.470],[33.120,35.354],[33.083,35.228]
+];
+const BLUE_LINE_SCHEMATIC=[
+  [33.087,35.110],[33.075,35.170],[33.065,35.240],[33.080,35.322],
+  [33.100,35.432],[33.112,35.515],[33.175,35.552],[33.279,35.579]
+];
 function getGeoConfig(year){return GEO_CHAPTER_MAPS[year]||null;}
+
 function geoMapPoint(bounds,lat,lon){return {x:(lon-bounds.west)/(bounds.east-bounds.west)*1000,y:(bounds.north-lat)/(bounds.north-bounds.south)*563};}
 function renderGeoPin(marker,bounds){const pt=geoMapPoint(bounds,marker.lat,marker.lon);return `<span class="map-pin geo-pin ${marker.tone||'red'} ${marker.position||'right'}" style="left:${(pt.x/10).toFixed(3)}%;top:${(pt.y/5.63).toFixed(3)}%" data-label="${escapeHTML(marker.label)}" data-lat="${marker.lat.toFixed(6)}" data-lon="${marker.lon.toFixed(6)}"></span>`;}
 function geoLine(bounds,pts){return pts.map((p,i)=>{let q=geoMapPoint(bounds,p[0],p[1]);return `${i?'L':'M'} ${q.x.toFixed(2)} ${q.y.toFixed(2)}`;}).join(' ');}
 function geoRoutePath(bounds,r){return geoLine(bounds,r.points||[r.from,r.to]);}
-function renderGeoChapterMap(year){const cfg=getGeoConfig(year);const scene=(cfg.scenes||[])[state.cue];const bounds=cfg.bounds;const arrows=(scene.routes||[]).map((r,i)=>`<path class="geo-route ${r.tone}" d="${geoRoutePath(bounds,r)}" marker-end="url(#geo-arrow-${r.tone})" style="animation-delay:${i*.15}s"></path>`).join('');const river=scene.river?`<path class="geo-river" d="${geoLine(bounds,scene.river)}"></path>`:'';
+function renderGeoChapterMap(year){
+ const cfg=getGeoConfig(year),scene=cfg.scenes[state.cue],bounds=cfg.bounds;
+ const zone=scene.zone?`<polygon class="security-zone zone-${scene.zone}" points="${SECURITY_ZONE_2000.map(p=>{const q=geoMapPoint(bounds,p[0],p[1]);return q.x.toFixed(1)+','+q.y.toFixed(1)}).join(' ')}"/>`:'';
+ const line=scene.blueLine?`<path class="geo-blue-line" d="${geoLine(bounds,BLUE_LINE_SCHEMATIC)}"/>`:'';
+ const routes=(scene.routes||[]).map((r,i)=>{
+  const d=geoRoutePath(bounds,r),type=r.tone||'advance',isWithdrawal=type==='withdrawal';
+  const motion=isWithdrawal?`<circle r="5.6" class="withdrawal-unit"><animateMotion dur="${(3.0+i*.25).toFixed(2)}s" begin="${(i*.45).toFixed(2)}s" repeatCount="indefinite" path="${d}"/></circle>`:'';
+  return `<path class="geo-route ${type}" d="${d}" marker-end="url(#geo-arrow-${type})" style="animation-delay:${(i*.40).toFixed(2)}s"></path>${motion}`;
+ }).join('');
+ const river=scene.river?`<path class="geo-river" d="${geoLine(bounds,scene.river)}"></path>`:'';
+ const stage=scene.phase?`<div class="geo-stage-label" aria-label="${escapeHTML(scene.phase)}">${escapeHTML(scene.phase)}</div>`:'';
  return `<div class="map-frame geographic" id="mapFrame" data-geographic-scene="${state.cue+1}" data-geographic-year="${escapeHTML(year)}">
  <img src="${escapeHTML(cfg.image)}" alt="${escapeHTML(cfg.alt)}">
- <svg class="map-routes geographic-routes" viewBox="0 0 1000 563" preserveAspectRatio="none" aria-hidden="true"><defs><marker id="geo-arrow-incursion" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto" markerUnits="strokeWidth"><path d="M 0 0 L 5 2.5 L 0 5 Z" fill="#efc476"></path></marker><marker id="geo-arrow-advance" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto" markerUnits="strokeWidth"><path d="M 0 0 L 5 2.5 L 0 5 Z" fill="#7fd8eb"></path></marker></defs>${river}${arrows}</svg>
- <div class="map-vignette"></div><span class="geo-compass" aria-hidden="true">N ↑</span>${scene.markers.map(m=>renderGeoPin(m,bounds)).join('')}</div>
- <div class="geographic-legend"><strong>◉ ${scene.title}</strong><span>${escapeHTML(scene.note||'Settlement markers follow a calibrated map projection. Movement arrows are schematic for teaching purposes.')}</span></div>`;}
+ <svg class="map-routes geographic-routes" viewBox="0 0 1000 563" preserveAspectRatio="none" aria-hidden="true"><defs>
+ <marker id="geo-arrow-incursion" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M 0 0 L 6 3 L 0 6 Z" fill="#efc476"/></marker>
+ <marker id="geo-arrow-advance" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M 0 0 L 6 3 L 0 6 Z" fill="#7fd8eb"/></marker>
+ <marker id="geo-arrow-withdrawal" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M 0 0 L 6 3 L 0 6 Z" fill="#9ceaff"/></marker>
+ </defs>${zone}${line}${river}${routes}</svg>
+ <div class="map-vignette"></div>${stage}<span class="geo-compass" aria-hidden="true">N ↑</span>${scene.markers.map(m=>renderGeoPin(m,bounds)).join('')}</div>
+ <div class="geographic-legend"><strong>◉ ${escapeHTML(scene.title)}</strong><span>${escapeHTML(scene.note||'Settlement markers follow a calibrated map projection. Movement arrows are schematic for teaching purposes.')}</span></div>`;
+}
 
 function chapterDisplay(c){return Object.assign({},c,CHAPTER_IMAGE_OVERRIDES[c.year]||{});}
 function getIntelScene(c){const list=INTEL_SCENES[c.year]||[];return list[state.cue]||{mode:'base',markers:c.markers||[],routes:c.route?[{d:c.route,className:c.year==='2000'?'withdraw':'push'}]:[]};}
@@ -579,7 +608,7 @@ function renderFinal(){return `<section class="final-screen appear"><div class="
  <div class="final-actions"><button class="btn btn-primary" data-action="download">DOWNLOAD MY CABINET RECORD ↓</button><button class="btn btn-gold" data-action="restart">RESTART THE GAME ↺</button><a class="btn" href="educator_guide.html" target="_blank" rel="noopener">EDUCATOR GUIDE ↗</a></div></section>`;}
 function showModal(type){lastFocus=document.activeElement;const modal=$('#modalRoot');let content='';
  if(type==='howto')content=`<span class="section-kicker">BEFORE YOU BEGIN</span><h2>HOW TO PLAY</h2><p>You are Israel’s Prime Minister. The historical setting changes in each chapter.</p><ol><li>Read the short security briefing and study the animated map.</li><li>Listen to the military and diplomatic advisers. Their words are <strong>educational reconstructions</strong>.</li><li>Choose one of three cabinet decisions. Think about civilian safety, security and diplomacy.</li><li>Review the possible tradeoffs, then select <strong>What Really Happened?</strong> to learn the actual outcome.</li><li>After six chapters, compare your choices with history. You can save a record of your decisions.</li></ol><p><strong>Example:</strong> In 2000, you might choose to withdraw from southern Lebanon. The game will explain the potential risks and then show what Israel actually did.</p><p>No points, no countdown and no rewriting history. Each chapter takes approximately two minutes. Videos start automatically, muted. You can skip them.</p><div class="action-row"><button class="btn btn-primary" data-modal="close">UNDERSTOOD ✓</button></div>`;
- if(type==='sources')content=`<span class="section-kicker">RESEARCH &amp; IMAGE CREDITS</span><h2>SOURCES &amp; CREDITS</h2><p>The historical record draws on UN documentation, institutional research, and a supplied StandWithUs UK presentation. The choices and adviser dialogue are educational reconstructions.</p><div class="reveal-links">${listSources(Object.keys(SOURCES))}</div><p><strong>Map assets:</strong> the four maps supplied for this activity. They are illustrative, and movement markers are schematic.</p><p><strong>Archive images and videos:</strong> supplied for this activity or extracted from the Northern Arrows presentation. The media includes third party news footage. Some source slides contain third party photographs or news imagery. Publication permission has been granted for the supplied activity media.</p><p><strong>Branding:</strong> StandWithUs UK and Explore artwork supplied from the user’s prior materials.</p><div class="action-row"><button class="btn btn-primary" data-modal="close">CLOSE</button></div>`;
+ if(type==='sources')content=`<span class="section-kicker">RESEARCH &amp; IMAGE CREDITS</span><h2>SOURCES &amp; CREDITS</h2><p>The historical record draws on UN documentation, institutional research, and a supplied StandWithUs UK presentation. The choices and adviser dialogue are educational reconstructions.</p><div class="reveal-links">${listSources(Object.keys(SOURCES))}</div><p><strong>Map assets:</strong> geographically calibrated teaching maps with illustrative movement arrows. Security zone and withdrawal routes are schematic rather than exact operational boundaries.</p><p><strong>Archive images and videos:</strong> supplied for this activity or extracted from the Northern Arrows presentation. The media includes third party news footage. Some source slides contain third party photographs or news imagery. Publication permission has been granted for the supplied activity media.</p><p><strong>Branding:</strong> StandWithUs UK and Explore artwork supplied from the user’s prior materials.</p><div class="action-row"><button class="btn btn-primary" data-modal="close">CLOSE</button></div>`;
  if(type==='video'){const clip=VIDEO_CLIPS[chapter().year];if(!clip)return; const inline=$('.autoplay-archive');if(inline)inline.pause();if(state.sound)stopAmbience();content=`<span class="section-kicker">OPTIONAL HISTORICAL FOOTAGE</span><h2>${escapeHTML(clip.title)}</h2><div class="modal-video"><video controls autoplay playsinline preload="auto" poster="assets/media/${clip.poster}" aria-label="Historical news footage"><source src="assets/media/${clip.file}" type="video/mp4">Your browser does not support video.</video></div><p>${escapeHTML(clip.summary)}</p><p class="small-muted">${escapeHTML(clip.credit)}. Video editing is for classroom duration. The full video is not included. This edited clip is included with permission for this activity.</p><div class="action-row"><button class="btn btn-primary" data-modal="close">RETURN TO CABINET</button></div>`;}
  if(type==='sensitive'){content=`<span class="section-kicker">CONTENT NOTICE</span><h2>ARCHIVE PHOTOGRAPH</h2><p>This historical photograph shows people carrying a covered casualty following an attack. You may choose not to view it.</p><div class="sensitive-controls"><button class="btn btn-primary" data-modal="showphoto">SHOW THE PHOTOGRAPH</button><button class="btn" data-modal="close">SKIP PHOTO</button></div><div id="sensitiveImage"></div>`;}
  if(type==='restart')content=`<span class="section-kicker">RESET ALL DECISIONS</span><h2>RESTART THE GAME?</h2><p>This will clear your current cabinet record and return to the welcome screen.</p><div class="action-row"><button class="btn btn-gold" data-modal="confirmrestart">YES, RESTART</button><button class="btn" data-modal="close">KEEP PLAYING</button></div>`;

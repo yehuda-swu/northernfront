@@ -17,7 +17,7 @@ The six chapters cover 1978, 1982, 1993, 2000, 2006 and 2024. A final historical
 * `game.js` complete standalone game and chapter data
 * `educator_guide.html` facilitator notes and historical context
 * `SOURCES.md` research references and image notes
-* `assets/` four map images, programme logos, six historical archive slide extracts and a media folder with compressed photos and two optional video clips
+* `assets/` calibrated chapter maps, programme logos, historical archive images and compressed video clips
 * `README.md` these instructions
 
 ## Upload through the GitHub website
@@ -28,7 +28,7 @@ The six chapters cover 1978, 1982, 1993, 2000, 2006 and 2024. A final historical
 4. Upload the extracted files and the `assets` folder contents. Make sure `index.html` is located at the repository root, not inside another folder.
 5. Enter this exact suggested commit message:
 
-   `Update Northern Front chapter images and video autoplay`
+   `Match Northern Front map shading and improve the 2000 withdrawal sequence`
 
 6. Select **Commit changes**.
 7. Open **Settings**, then **Pages**.
@@ -46,7 +46,7 @@ Run these commands from the extracted project folder, with the remote pointing a
 git init
 git branch -M main
 git add .
-git commit -m "Update Northern Front chapter images and video autoplay"
+git commit -m "Match Northern Front map shading and improve the 2000 withdrawal sequence"
 git remote add origin https://github.com/yehuda-swu/northernfront.git
 git push -u origin main
 ```
@@ -55,7 +55,7 @@ If your local project already tracks a remote repository, do not run `git init` 
 
 ```bash
 git add .
-git commit -m "Update Northern Front chapter images and video autoplay"
+git commit -m "Match Northern Front map shading and improve the 2000 withdrawal sequence"
 git push
 ```
 
@@ -63,7 +63,7 @@ git push
 
 Open `game.js`. The six chapters are in the `CHAPTERS` array. Each chapter defines its historical briefing, adviser names, map, decision options, possible consequences, actual history and source references. Edit text in the corresponding chapter object, save and commit the changes. Do not claim alternative choices are what would actually have happened.
 
-Replace an archive photo by keeping the same filename in the `assets` folder. The source photos are excerpts from the supplied presentation. Confirm image reuse rights before publicly deploying them.
+Replace an archive photo by keeping the same filename in the `assets` folder. The user has confirmed publication permission for the supplied materials.
 
 ## Accessibility and troubleshooting
 
@@ -81,7 +81,7 @@ This is a history and decision making activity, not a military training tool. It
 
 ## Public image use
 
-The maps and logos were supplied as user materials. The six archive panels come from the user supplied Northern Arrows presentation and may contain third party photographs. Check copyright and licence permissions before publicly publishing the archive image files through GitHub Pages.
+The user has confirmed permission to use the supplied archive images and footage. The game also includes its own educational map overlays. Keep original source credits where applicable.
 
 ## Update: archive material and sixth chapter
 
@@ -116,3 +116,17 @@ The 1978 PLO Threat cabinet intelligence map uses an independent geographic back
 The settlement markers for Ma'alot, Avivim, and Kiryat Shmona use the exact DMS coordinates supplied by the educator, converted mathematically to decimal degrees. Beirut uses its GeoNames location. The Litani River mouth is sourced to a World Bank study; the river line between reference points is illustrative. The PLO base and incursion arrows are illustrative and do not claim to reproduce exact historical attack routes. The 1978 IDF arrows stop in southern Lebanon, not at Beirut.
 
 The other five chapters and their historical map overlays remain unchanged.
+
+
+## Version 12 map update
+
+* Fixed the actual regional map raster. The later five chapters now use the same dark navy sea and muted green land palette sampled from the Chapter 1 geographic map. The previous map showed most land almost the same colour as the sea.
+* Improved the geographic labelling of southern Lebanese locations and Hezbollah activity in the 1993, 2006 and 2024 chapters.
+* Rebuilt the year 2000 cabinet map as three visually distinct scenes: an approximate highlighted security zone, an animated Israeli withdrawal towards Israel, and the former security zone after the pullback.
+* The 2000 withdrawal uses three moving markers and blue arrows, while the earlier security zone shading fades as the sequence advances.
+* The border reference line is an **illustrative rendering** of the UN Blue Line. It is a withdrawal verification line, not an agreed international border. Military routes and area overlays are schematic rather than verified operational maps.
+* Checked the live HTML view at desktop and phone sizes with 2000 animated routes and distinct map scenes.
+
+### Verification
+
+The standalone game and its core assets remain offline capable. The original six chapter gameplay, archive footage, source links and educator guide remain intact.

@@ -208,3 +208,43 @@ body{font-size:17px}
  .geographic-legend span{text-align:left}
 }
 @media(prefers-reduced-motion:reduce){.geographic-routes path.geo-route,.map-frame.geographic .geo-pin{animation:none!important}}
+
+/* Version 12: consistent geographic maps and clear 2000 withdrawal sequence */
+.geographic-routes .security-zone{
+  stroke:#eac180;stroke-width:2.4;stroke-linejoin:round;
+  fill:rgba(223,161,69,.19);filter:drop-shadow(0 0 8px #e6b56844);
+  transition:fill .6s ease,opacity .6s ease;
+}
+.geographic-routes .security-zone.zone-fading{fill:rgba(223,161,69,.085);stroke-dasharray:6 7;stroke:#e5be7f;opacity:.72}
+.geographic-routes .security-zone.zone-outline{fill:rgba(223,161,69,.018);stroke-dasharray:5 8;stroke:#b59666;opacity:.65}
+.geographic-routes path.geo-blue-line{
+  fill:none;stroke:#8bcfed;stroke-width:3.2;stroke-dasharray:6 5;
+  filter:drop-shadow(0 0 4px #81d7ff7a);animation:none;opacity:.93
+}
+.geographic-routes path.geo-route.withdrawal{
+  fill:none;stroke:#a7edff;stroke-width:5.2;stroke-linecap:round;
+  stroke-dasharray:12 7;filter:drop-shadow(0 0 7px #87defdad);
+  animation:withdrawalFlow 1.9s linear infinite
+}
+.geographic-routes .withdrawal-unit{fill:#d5f6ff;stroke:#2a6d89;stroke-width:2;filter:drop-shadow(0 0 6px #b3ecff)}
+.geographic-routes #geo-arrow-withdrawal path{fill:#a7edff;filter:none;stroke:none;animation:none}
+@keyframes withdrawalFlow{to{stroke-dashoffset:-76}}
+.map-frame.geographic .geo-stage-label{
+  position:absolute;z-index:4;left:11px;top:10px;pointer-events:none;
+  background:#0c2639e8;color:#e8d1a5;border:1px solid #a78d638c;
+  padding:7px 10px;border-radius:5px;font-size:11px;font-weight:900;
+  letter-spacing:.08em;text-shadow:0 1px 2px #000;
+  box-shadow:0 4px 15px #0007;
+}
+@media(max-width:700px){
+ .map-frame.geographic .geo-stage-label{font-size:8px;padding:4px 6px;top:6px;left:6px;max-width:75%}
+ .geographic-routes path.geo-route.withdrawal{stroke-width:6.5}
+ .geographic-routes .security-zone{stroke-width:3}
+}
+@media(prefers-reduced-motion:reduce){
+ .geographic-routes path.geo-route.withdrawal{animation:none!important}
+ .geographic-routes .withdrawal-unit{display:none!important}
+}
+
+.map-frame.geographic .map-pin.geo-pin.below::after{top:19px;bottom:auto;left:0}
+@media(max-width:700px){.map-frame.geographic .map-pin.geo-pin.below::after{top:13px;bottom:auto;left:0}}
