@@ -281,64 +281,200 @@ const INTEL_SCENES={
 };
 
 
-// Chapter 1 uses a geographic coordinate system, not the uncalibrated photographic overlay.
-// The three settlements use the coordinates supplied by the educator in degrees, minutes and seconds.
+// Geographic map system used for Chapter 1 and, from Version 10 onward, the remaining chapters as well.
+// This avoids visual guesswork and lets major settlements be placed using latitude / longitude.
 const CHAPTER_ONE_BOUNDS={west:34.78,east:36.04,south:32.91,north:34.02};
-const CHAPTER_ONE_PLACES={
+const REGIONAL_BOUNDS={west:34.88,east:35.82,south:32.72,north:34.05};
+const GEO_PLACES={
   maalot:{lat:33+1/60+15.3/3600,lon:35+16/60+38/3600},
   avivim:{lat:33+5/60+15.6/3600,lon:35+28/60+16.4/3600},
   kiryat:{lat:33+12/60+44.8/3600,lon:35+34/60+13.1/3600},
   beirut:{lat:33.89332,lon:35.50157},
-  litaniMouth:{lat:33.3399,lon:35.2446},
-  litaniKhardale:{lat:33+20/60+22/3600,lon:35+32/60+33/3600},
+  sidon:{lat:33.56310,lon:35.36890},
+  tyre:{lat:33.27333,lon:35.19389},
+  nabatieh:{lat:33.37722,lon:35.48361},
+  marjayoun:{lat:33.36194,lon:35.58972},
+  khiam:{lat:33.32722,lon:35.61111},
+  bintjbeil:{lat:33.11970,lon:35.43290},
+  metula:{lat:33.2790,lon:35.5792},
+  malkiya:{lat:33.09833,lon:35.51111},
+  nahariya:{lat:33.00583,lon:35.09889},
+  haifa:{lat:32.79404,lon:34.98957},
+  roshhanikra:{lat:33.08610,lon:35.11030},
+  zarit:{lat:33.06540,lon:35.22350},
+  litaniMouth:{lat:33.33990,lon:35.24460},
+  litaniKhardale:{lat:33.33944,lon:35.54250}
 };
-const CHAPTER_ONE_INTEL=[
-  {
-    title:'PLO OPERATIONS',
-    // The position of PLO staging bases and their arrows is illustrative, not a surveyed base location.
-    markers:[{lat:33.33,lon:35.41,label:'PLO BASES',tone:'red',illustrative:true}],
-    routes:[
-      {from:[33.33,35.41],to:[CHAPTER_ONE_PLACES.avivim.lat,CHAPTER_ONE_PLACES.avivim.lon],tone:'incursion'},
-      {from:[33.33,35.41],to:[CHAPTER_ONE_PLACES.kiryat.lat,CHAPTER_ONE_PLACES.kiryat.lon],tone:'incursion'}
-    ],
-    note:'Base and incursion arrows are illustrative, not verified operational routes.'
+const GEO_CHAPTER_MAPS={
+  '1978':{
+    image:'assets/map_1978_geo.webp',bounds:CHAPTER_ONE_BOUNDS,alt:'Geographically projected map of Lebanon, the northern Israeli border and Beirut, with accurate coastline and settlement locations',
+    scenes:[
+      {title:'PLO OPERATIONS',markers:[{lat:33.33,lon:35.41,label:'PLO BASES',tone:'red',position:'right'}],routes:[
+        {from:[33.33,35.41],to:[GEO_PLACES.avivim.lat,GEO_PLACES.avivim.lon],tone:'incursion'},
+        {from:[33.33,35.41],to:[GEO_PLACES.kiryat.lat,GEO_PLACES.kiryat.lon],tone:'incursion'}],
+       note:'PLO base marker is illustrative. The town locations use the supplied coordinates.'},
+      {title:'ATTACKED COMMUNITIES',markers:[
+        {...GEO_PLACES.maalot,label:'MAALOT',tone:'red',position:'above'},
+        {...GEO_PLACES.avivim,label:'AVIVIM',tone:'red',position:'left'},
+        {...GEO_PLACES.kiryat,label:'KIRYAT SHMONA',tone:'red',position:'right'}],routes:[],
+       note:'Maalot, Avivim and Kiryat Shmona are plotted from the coordinates provided for this activity.'},
+      {title:'OPERATION LITANI',markers:[
+        {...GEO_PLACES.beirut,label:'BEIRUT',tone:'blue',position:'right'},
+        {lat:33.338,lon:35.39,label:'LITANI RIVER',tone:'blue',position:'above'},
+        {lat:33.205,lon:35.36,label:'IDF ADVANCE',tone:'gold',position:'left'}],
+       routes:[
+        {from:[33.085,35.33],to:[33.255,35.355],tone:'advance'},
+        {from:[33.125,35.49],to:[33.285,35.515],tone:'advance'}],
+       river:[[GEO_PLACES.litaniMouth.lat,GEO_PLACES.litaniMouth.lon],[33.335,35.32],[33.33,35.405],[33.337,35.475],[GEO_PLACES.litaniKhardale.lat,GEO_PLACES.litaniKhardale.lon]],
+       note:'Beirut is shown only as a geographic reference. The Israeli advance is shown stopping in southern Lebanon.'}
+    ]
   },
-  {
-    title:'BORDER COMMUNITIES',
-    markers:[
-      {...CHAPTER_ONE_PLACES.maalot,label:'MA’ALOT',tone:'red',position:'above'},
-      {...CHAPTER_ONE_PLACES.avivim,label:'AVIVIM',tone:'red',position:'right'},
-      {...CHAPTER_ONE_PLACES.kiryat,label:'KIRYAT SHMONA',tone:'red',position:'above'}
-    ],routes:[],note:'All three town markers use the coordinates supplied for this activity.'
+  '1982':{
+    image:'assets/map_regional_geo.webp',bounds:REGIONAL_BOUNDS,alt:'Calibrated regional map of Lebanon and northern Israel for the First Lebanon War',
+    scenes:[
+      {title:'CONTINUED ATTACKS',markers:[
+        {lat:33.22,lon:35.29,label:'PLO POSITIONS',tone:'red',position:'left'},
+        {...GEO_PLACES.kiryat,label:'KIRYAT SHMONA',tone:'blue',position:'right'},
+        {...GEO_PLACES.nahariya,label:'NAHARIYA',tone:'blue',position:'right'}],
+       routes:[
+        {from:[33.22,35.29],to:[GEO_PLACES.kiryat.lat,GEO_PLACES.kiryat.lon],tone:'incursion'},
+        {from:[33.18,35.19],to:[GEO_PLACES.nahariya.lat,GEO_PLACES.nahariya.lon],tone:'incursion'}],
+       note:'Markers are placed around the border zone and main northern communities to show the cross-border threat.'},
+      {title:'INVASION AXES',markers:[
+        {...GEO_PLACES.tyre,label:'TYRE',tone:'blue',position:'left'},
+        {...GEO_PLACES.sidon,label:'SIDON',tone:'blue',position:'right'},
+        {lat:33.16,lon:35.35,label:'CENTRAL AXIS',tone:'gold',position:'left'}],
+       routes:[
+        {points:[[GEO_PLACES.roshhanikra.lat,GEO_PLACES.roshhanikra.lon],[33.15,35.14],[33.22,35.17],[GEO_PLACES.tyre.lat,GEO_PLACES.tyre.lon]],tone:'advance'},
+        {points:[[33.12,35.47],[33.23,35.42],[33.37,35.39],[GEO_PLACES.sidon.lat,GEO_PLACES.sidon.lon]],tone:'advance'}],
+       note:'The two arrows show the coastal and central approaches into Lebanon during the 1982 invasion.'},
+      {title:'TOWARDS BEIRUT',markers:[
+        {...GEO_PLACES.beirut,label:'BEIRUT',tone:'blue',position:'right'},
+        {...GEO_PLACES.sidon,label:'SIDON',tone:'gold',position:'left'},
+        {lat:33.75,lon:35.46,label:'APPROACHES',tone:'gold',position:'left'}],
+       routes:[
+        {points:[[GEO_PLACES.sidon.lat,GEO_PLACES.sidon.lon],[33.66,35.41],[33.78,35.45],[33.84,35.48]],tone:'advance'},
+        {points:[[33.36,35.57],[33.50,35.57],[33.66,35.54],[33.79,35.50]],tone:'advance'}],
+       note:'The advance routes are schematic but geographically aligned with the road north toward Beirut.'}
+    ]
   },
-  {
-    title:'OPERATION LITANI',
-    markers:[
-      {...CHAPTER_ONE_PLACES.beirut,label:'BEIRUT · REFERENCE',tone:'blue',position:'right'},
-      {lat:33.34,lon:35.405,label:'LITANI RIVER',tone:'blue',position:'above'},
-      {lat:33.205,lon:35.37,label:'IDF ADVANCE',tone:'gold',position:'left'}
-    ],
-    routes:[
-      {from:[33.085,35.33],to:[33.275,35.36],tone:'advance'},
-      {from:[33.12,35.52],to:[33.295,35.515],tone:'advance'}
-    ],
-    river:[
-      [CHAPTER_ONE_PLACES.litaniMouth.lat,CHAPTER_ONE_PLACES.litaniMouth.lon],
-      [33.335,35.32],[33.33,35.405],[33.337,35.475],
-      [CHAPTER_ONE_PLACES.litaniKhardale.lat,CHAPTER_ONE_PLACES.litaniKhardale.lon]
-    ],
-    note:'Beirut is shown for reference only. The operation advanced into southern Lebanon, not Beirut.'
+  '1993':{
+    image:'assets/map_regional_geo.webp',bounds:REGIONAL_BOUNDS,alt:'Calibrated regional map of southern Lebanon and northern Israel for the rise of Hezbollah',
+    scenes:[
+      {title:'HEZBOLLAH RISES',markers:[
+        {...GEO_PLACES.nabatieh,label:'NABATIEH',tone:'red',position:'right'},
+        {...GEO_PLACES.bintjbeil,label:'BINT JBEIL',tone:'red',position:'left'},
+        {...GEO_PLACES.marjayoun,label:'MARJAYOUN',tone:'blue',position:'right'}],routes:[],
+       note:'These markers identify the southern Lebanese area in which Hezbollah became a major armed actor.'},
+      {title:'ROCKET FIRE',markers:[
+        {...GEO_PLACES.kiryat,label:'KIRYAT SHMONA',tone:'blue',position:'right'},
+        {...GEO_PLACES.nahariya,label:'NAHARIYA',tone:'blue',position:'right'},
+        {lat:33.16,lon:35.42,label:'HEZBOLLAH FIRE',tone:'red',position:'left'}],
+       routes:[
+        {from:[33.16,35.42],to:[GEO_PLACES.kiryat.lat,GEO_PLACES.kiryat.lon],tone:'incursion'},
+        {from:[33.14,35.28],to:[GEO_PLACES.nahariya.lat,GEO_PLACES.nahariya.lon],tone:'incursion'}],
+       note:'The arrows are schematic and indicate rocket fire from southern Lebanon into northern Israeli towns.'},
+      {title:'ISRAELI STRIKES',markers:[
+        {...GEO_PLACES.nabatieh,label:'HEZBOLLAH AREAS',tone:'red',position:'right'},
+        {lat:33.21,lon:35.37,label:'ISRAELI STRIKES',tone:'gold',position:'left'},
+        {lat:33.52,lon:35.43,label:'DISPLACEMENT PRESSURE',tone:'blue',position:'right'}],
+       routes:[
+        {points:[[33.09,35.33],[33.16,35.36],[33.24,35.40],[33.30,35.46]],tone:'advance'},
+        {points:[[33.15,35.50],[33.22,35.49],[33.29,35.48],[33.36,35.48]],tone:'advance'}],
+       note:'This scene shows the main southern Lebanese belt hit during Israel\'s response in 1993.'}
+    ]
+  },
+  '2000':{
+    image:'assets/map_regional_geo.webp',bounds:REGIONAL_BOUNDS,alt:'Calibrated regional map of southern Lebanon and northern Israel for the Israeli withdrawal',
+    scenes:[
+      {title:'SECURITY ZONE',markers:[
+        {lat:33.23,lon:35.43,label:'SECURITY ZONE',tone:'gold',position:'left'},
+        {...GEO_PLACES.marjayoun,label:'IDF / SLA',tone:'blue',position:'right'},
+        {...GEO_PLACES.bintjbeil,label:'HEZBOLLAH',tone:'red',position:'left'}],routes:[],
+       note:'The security zone is shown as the belt of southern Lebanon held by Israel and the South Lebanon Army before 2000.'},
+      {title:'WITHDRAWAL',markers:[
+        {lat:33.20,lon:35.42,label:'WITHDRAWAL',tone:'gold',position:'left'},
+        {...GEO_PLACES.metula,label:'BLUE LINE',tone:'blue',position:'right'},
+        {...GEO_PLACES.marjayoun,label:'SLA COLLAPSE',tone:'red',position:'left'}],
+       routes:[
+        {points:[[33.23,35.45],[33.20,35.48],[33.17,35.52],[33.12,35.55],[GEO_PLACES.metula.lat,GEO_PLACES.metula.lon]],tone:'advance'},
+        {points:[[33.18,35.37],[33.15,35.43],[33.12,35.47],[GEO_PLACES.malkiya.lat,GEO_PLACES.malkiya.lon]],tone:'advance'}],
+       note:'The arrows show the southward pullback into Israel in May 2000.'},
+      {title:'AFTER THE WITHDRAWAL',markers:[
+        {...GEO_PLACES.metula,label:'ISRAELI BORDER',tone:'blue',position:'right'},
+        {lat:33.23,lon:35.44,label:'FORMER SECURITY ZONE',tone:'gold',position:'left'},
+        {...GEO_PLACES.bintjbeil,label:'HEZBOLLAH PRESENCE',tone:'red',position:'left'}],routes:[],
+       note:'After the withdrawal, Hezbollah remained active in the former security-zone area just north of the border.'}
+    ]
+  },
+  '2006':{
+    image:'assets/map_regional_geo.webp',bounds:REGIONAL_BOUNDS,alt:'Calibrated regional map of southern Lebanon and northern Israel for the 2006 war',
+    scenes:[
+      {title:'BORDER RAID',markers:[
+        {...GEO_PLACES.zarit,label:'ZARIT SECTOR',tone:'gold',position:'right'},
+        {lat:33.122,lon:35.402,label:'HEZBOLLAH POSITIONS',tone:'red',position:'left'},
+        {lat:33.09,lon:35.27,label:'PATROL AREA',tone:'blue',position:'left'}],
+       routes:[
+        {points:[[33.122,35.402],[33.11,35.35],[33.09,35.29],[33.072,35.24]],tone:'incursion'}],
+       note:'This schematic scene shows the cross-border raid area that sparked the 2006 war.'},
+      {title:'ROCKET IMPACTS',markers:[
+        {...GEO_PLACES.haifa,label:'HAIFA',tone:'red',position:'above'},
+        {...GEO_PLACES.nahariya,label:'NAHARIYA',tone:'red',position:'right'},
+        {...GEO_PLACES.kiryat,label:'KIRYAT SHMONA',tone:'red',position:'right'}],
+       routes:[
+        {from:[33.16,35.42],to:[GEO_PLACES.kiryat.lat,GEO_PLACES.kiryat.lon],tone:'incursion'},
+        {from:[33.15,35.28],to:[GEO_PLACES.nahariya.lat,GEO_PLACES.nahariya.lon],tone:'incursion'},
+        {from:[33.20,35.34],to:[GEO_PLACES.haifa.lat,GEO_PLACES.haifa.lon],tone:'incursion'}],
+       note:'The three markers show major northern Israeli communities targeted during the rocket campaign.'},
+      {title:'GROUND OFFENSIVE',markers:[
+        {lat:33.18,lon:35.41,label:'GROUND OFFENSIVE',tone:'gold',position:'left'},
+        {lat:33.34,lon:35.39,label:'LITANI LINE',tone:'blue',position:'above'},
+        {...GEO_PLACES.metula,label:'UN 1701 / BORDER',tone:'red',position:'right'}],
+       routes:[
+        {points:[[33.10,35.27],[33.16,35.30],[33.22,35.33],[33.30,35.36]],tone:'advance'},
+        {points:[[33.12,35.49],[33.19,35.46],[33.25,35.43],[33.31,35.40]],tone:'advance'}],
+       river:[[GEO_PLACES.litaniMouth.lat,GEO_PLACES.litaniMouth.lon],[33.335,35.32],[33.33,35.405],[33.337,35.475],[GEO_PLACES.litaniKhardale.lat,GEO_PLACES.litaniKhardale.lon]],
+       note:'The Israeli ground thrust is shown moving north toward the Litani corridor.'}
+    ]
+  },
+  '2024':{
+    image:'assets/map_regional_geo.webp',bounds:REGIONAL_BOUNDS,alt:'Calibrated regional map of southern Lebanon and northern Israel for Operation Northern Arrows',
+    scenes:[
+      {title:'HEZBOLLAH FIRE',markers:[
+        {...GEO_PLACES.khiam,label:'KHIAM / FIRE ORIGIN',tone:'red',position:'right'},
+        {...GEO_PLACES.metula,label:'METULA',tone:'blue',position:'right'},
+        {...GEO_PLACES.kiryat,label:'KIRYAT SHMONA',tone:'blue',position:'right'}],
+       routes:[
+        {from:[GEO_PLACES.khiam.lat,GEO_PLACES.khiam.lon],to:[GEO_PLACES.metula.lat,GEO_PLACES.metula.lon],tone:'incursion'},
+        {from:[33.17,35.46],to:[GEO_PLACES.kiryat.lat,GEO_PLACES.kiryat.lon],tone:'incursion'}],
+       note:'This scene shows representative attack vectors from southern Lebanon into northern Israeli communities.'},
+      {title:'EVACUATED COMMUNITIES',markers:[
+        {...GEO_PLACES.metula,label:'METULA',tone:'red',position:'right'},
+        {...GEO_PLACES.kiryat,label:'KIRYAT SHMONA',tone:'red',position:'right'},
+        {...GEO_PLACES.malkiya,label:'MALKIYA',tone:'red',position:'left'}],routes:[],
+       note:'These three markers identify communities repeatedly highlighted in the northern evacuation story.'},
+      {title:'OPERATION NORTHERN ARROWS',markers:[
+        {lat:33.19,lon:35.42,label:'INTENSIFIED STRIKES',tone:'gold',position:'left'},
+        {...GEO_PLACES.khiam,label:'SOUTH LEBANON',tone:'red',position:'right'},
+        {lat:33.14,lon:35.39,label:'GROUND INCURSIONS',tone:'blue',position:'left'}],
+       routes:[
+        {points:[[33.09,35.29],[33.14,35.33],[33.18,35.38],[33.22,35.42]],tone:'advance'},
+        {points:[[33.11,35.47],[33.17,35.49],[33.22,35.50],[33.27,35.51]],tone:'advance'}],
+       note:'The final scene shows Israeli strikes and incursions focused on the southern Lebanese launch area.'}
+    ]
   }
-];
-function geoMapPoint(lat,lon){const b=CHAPTER_ONE_BOUNDS;return {x:(lon-b.west)/(b.east-b.west)*1000,y:(b.north-lat)/(b.north-b.south)*563};}
-function renderGeoPin(marker){const pt=geoMapPoint(marker.lat,marker.lon);return `<span class="map-pin geo-pin ${marker.tone||'red'} ${marker.position||'right'}" style="left:${(pt.x/10).toFixed(3)}%;top:${(pt.y/5.63).toFixed(3)}%" data-label="${escapeHTML(marker.label)}" data-lat="${marker.lat.toFixed(6)}" data-lon="${marker.lon.toFixed(6)}"></span>`;}
-function geoLine(pts){return pts.map((p,i)=>{let q=geoMapPoint(p[0],p[1]);return `${i?'L':'M'} ${q.x.toFixed(2)} ${q.y.toFixed(2)}`;}).join(' ');}
-function renderChapterOneMap(){const scene=CHAPTER_ONE_INTEL[state.cue];const arrows=(scene.routes||[]).map((r,i)=>`<path class="geo-route ${r.tone}" d="${geoLine([r.from,r.to])}" marker-end="url(#geo-arrow-${r.tone})" style="animation-delay:${i*.15}s"></path>`).join('');const river=scene.river?`<path class="geo-river" d="${geoLine(scene.river)}"></path>`:'';
- return `<div class="map-frame geographic" id="mapFrame" data-geographic-scene="${state.cue+1}">
- <img src="assets/map_1978_geo.webp" alt="Geographically projected map of Lebanon, the northern Israeli border and Beirut, with accurate coastline and settlement locations">
+};
+function getGeoConfig(year){return GEO_CHAPTER_MAPS[year]||null;}
+function geoMapPoint(bounds,lat,lon){return {x:(lon-bounds.west)/(bounds.east-bounds.west)*1000,y:(bounds.north-lat)/(bounds.north-bounds.south)*563};}
+function renderGeoPin(marker,bounds){const pt=geoMapPoint(bounds,marker.lat,marker.lon);return `<span class="map-pin geo-pin ${marker.tone||'red'} ${marker.position||'right'}" style="left:${(pt.x/10).toFixed(3)}%;top:${(pt.y/5.63).toFixed(3)}%" data-label="${escapeHTML(marker.label)}" data-lat="${marker.lat.toFixed(6)}" data-lon="${marker.lon.toFixed(6)}"></span>`;}
+function geoLine(bounds,pts){return pts.map((p,i)=>{let q=geoMapPoint(bounds,p[0],p[1]);return `${i?'L':'M'} ${q.x.toFixed(2)} ${q.y.toFixed(2)}`;}).join(' ');}
+function geoRoutePath(bounds,r){return geoLine(bounds,r.points||[r.from,r.to]);}
+function renderGeoChapterMap(year){const cfg=getGeoConfig(year);const scene=(cfg.scenes||[])[state.cue];const bounds=cfg.bounds;const arrows=(scene.routes||[]).map((r,i)=>`<path class="geo-route ${r.tone}" d="${geoRoutePath(bounds,r)}" marker-end="url(#geo-arrow-${r.tone})" style="animation-delay:${i*.15}s"></path>`).join('');const river=scene.river?`<path class="geo-river" d="${geoLine(bounds,scene.river)}"></path>`:'';
+ return `<div class="map-frame geographic" id="mapFrame" data-geographic-scene="${state.cue+1}" data-geographic-year="${escapeHTML(year)}">
+ <img src="${escapeHTML(cfg.image)}" alt="${escapeHTML(cfg.alt)}">
  <svg class="map-routes geographic-routes" viewBox="0 0 1000 563" preserveAspectRatio="none" aria-hidden="true"><defs><marker id="geo-arrow-incursion" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto" markerUnits="strokeWidth"><path d="M 0 0 L 5 2.5 L 0 5 Z" fill="#efc476"></path></marker><marker id="geo-arrow-advance" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto" markerUnits="strokeWidth"><path d="M 0 0 L 5 2.5 L 0 5 Z" fill="#7fd8eb"></path></marker></defs>${river}${arrows}</svg>
- <div class="map-vignette"></div><span class="geo-compass" aria-hidden="true">N ↑</span>${scene.markers.map(renderGeoPin).join('')}</div>
- <div class="geographic-legend"><strong>◉ ${scene.title}</strong><span>${escapeHTML(scene.note)}</span></div>`;}
+ <div class="map-vignette"></div><span class="geo-compass" aria-hidden="true">N ↑</span>${scene.markers.map(m=>renderGeoPin(m,bounds)).join('')}</div>
+ <div class="geographic-legend"><strong>◉ ${scene.title}</strong><span>${escapeHTML(scene.note||'Settlement markers follow a calibrated map projection. Movement arrows are schematic for teaching purposes.')}</span></div>`;}
 
 function chapterDisplay(c){return Object.assign({},c,CHAPTER_IMAGE_OVERRIDES[c.year]||{});}
 function getIntelScene(c){const list=INTEL_SCENES[c.year]||[];return list[state.cue]||{mode:'base',markers:c.markers||[],routes:c.route?[{d:c.route,className:c.year==='2000'?'withdraw':'push'}]:[]};}
@@ -418,9 +554,9 @@ function renderCabinet(){let c=chapter(), scene=getIntelScene(c);const frameClas
  <div class="cabinet-title-row"><div><span class="eyebrow">ISRAELI SECURITY CABINET / BRIEFING ${c.number}</span><h1>${escapeHTML(c.title)}</h1><p class="chapter-subtitle">${escapeHTML(c.subtitle)}</p></div><span class="cabinet-date">${c.year}</span></div>
  <div class="cabinet-layout">
    <aside class="cabinet-col intel-col"><div class="dossier"><span class="intel-tag">TOP SECRET · HISTORICAL FILE</span><h3>THE SITUATION</h3>${c.context.map((x,i)=>`<div class="item"><b>0${i+1}</b><span>${escapeHTML(x)}</span></div>`).join('')}</div><div class="contextphoto ${c.cabinetPhoto?'featured-context-photo':''}"><img src="assets/${c.cabinetPhoto||c.archive}" alt="${escapeHTML(c.cabinetPhotoLabel||c.archiveLabel)}"><div class="captionbar">ARCHIVE MATERIAL · ${c.year}<br>${escapeHTML(c.cabinetPhotoLabel||c.archiveLabel)}</div></div></aside>
-   <div class="cabinet-col map-col"><section class="map-display" aria-label="Animated illustrative northern border map"><div class="map-header"><strong>◉ NORTHERN SECTOR MAP</strong><span>INTELLIGENCE DISPLAY / ${c.year}</span></div>${c.year==='1978'?renderChapterOneMap():`<div class="map-frame map-anim-enter ${frameClass}" id="mapFrame"><img src="assets/map_base.webp" alt="Terrain map showing Lebanon and northern Israel"><img class="map-overlay-image" src="assets/${c.map}" alt="Illustrative armed organisation overlay"><img class="map-overlay-amal" src="assets/map_amal.webp" alt="Illustrative Amal context map"><svg class="map-routes" viewBox="0 0 1000 563" preserveAspectRatio="none" aria-hidden="true">${renderSceneRoutes(scene)}</svg><div class="map-vignette"></div><div class="map-scan"></div><span class="map-label lebanon">🇱🇧 LEBANON</span><span class="map-label israel">🇮🇱 ISRAEL</span>${(scene.markers||[]).map(m=>`<span class="map-pin ${m.tone}" style="left:${m.x}%;top:${m.y}%" data-label="${escapeHTML(m.label)}"></span>`).join('')}</div>
+   <div class="cabinet-col map-col"><section class="map-display" aria-label="Animated illustrative northern border map"><div class="map-header"><strong>◉ NORTHERN SECTOR MAP</strong><span>INTELLIGENCE DISPLAY / ${c.year}</span></div>${getGeoConfig(c.year)?renderGeoChapterMap(c.year):`<div class="map-frame map-anim-enter ${frameClass}" id="mapFrame"><img src="assets/map_base.webp" alt="Terrain map showing Lebanon and northern Israel"><img class="map-overlay-image" src="assets/${c.map}" alt="Illustrative armed organisation overlay"><img class="map-overlay-amal" src="assets/map_amal.webp" alt="Illustrative Amal context map"><svg class="map-routes" viewBox="0 0 1000 563" preserveAspectRatio="none" aria-hidden="true">${renderSceneRoutes(scene)}</svg><div class="map-vignette"></div><div class="map-scan"></div><span class="map-label lebanon">🇱🇧 LEBANON</span><span class="map-label israel">🇮🇱 ISRAEL</span>${(scene.markers||[]).map(m=>`<span class="map-pin ${m.tone}" style="left:${m.x}%;top:${m.y}%" data-label="${escapeHTML(m.label)}"></span>`).join('')}</div>
    `}
-   ${c.year==='1978'?'':`<div class="map-legend"><div class="segmented"><button type="button" data-action="mapbase" class="${!state.mapOverlay&&!state.mapAmal?'active':''}" aria-pressed="${!state.mapOverlay&&!state.mapAmal}">TERRAIN</button><button type="button" data-action="maporg" class="${state.mapOverlay?'active':''}" aria-pressed="${state.mapOverlay}">HISTORICAL OVERLAY</button>${(c.year==='1982'||c.year==='1993'||c.year==='2000')?`<button type="button" data-action="mapamal" class="${state.mapAmal?'active':''}" aria-pressed="${state.mapAmal}">AMAL CONTEXT</button>`:''}</div><span class="map-note">Schematic positions, not exact operational data</span></div>`}</section>
+   ${getGeoConfig(c.year)?'':`<div class="map-legend"><div class="segmented"><button type="button" data-action="mapbase" class="${!state.mapOverlay&&!state.mapAmal?'active':''}" aria-pressed="${!state.mapOverlay&&!state.mapAmal}">TERRAIN</button><button type="button" data-action="maporg" class="${state.mapOverlay?'active':''}" aria-pressed="${state.mapOverlay}">HISTORICAL OVERLAY</button>${(c.year==='1982'||c.year==='1993'||c.year==='2000')?`<button type="button" data-action="mapamal" class="${state.mapAmal?'active':''}" aria-pressed="${state.mapAmal}">AMAL CONTEXT</button>`:''}</div><span class="map-note">Schematic positions, not exact operational data</span></div>`}</section>
    <div class="map-cue"><b>INTEL ${state.cue+1}/3</b><span>${escapeHTML(c.mapCues[state.cue])}</span><button type="button" class="btn btn-small" style="margin-left:auto;min-width:90px" data-action="nextcue">NEXT →</button></div><div class="cabinet-task"><strong>YOUR CABINET MISSION</strong><p>${escapeHTML(c.objective)}</p></div></div>
    <aside class="cabinet-col adviser-col">${renderAdviser(c.military,'military')}${renderAdviser(c.diplomatic,'diplomatic')}</aside>
  </div>
