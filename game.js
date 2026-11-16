@@ -180,21 +180,21 @@ const CHAPTER_IMAGE_OVERRIDES={
 const INTEL_SCENES={
   '1978':[
     {mode:'org',markers:[
-      {x:42.7,y:42.8,label:'PLO BASES',tone:'red'}],
+      {x:42.9,y:42.9,label:'PLO BASES',tone:'red'}],
       routes:[
-        {d:'M 426 286 Q 434 330 439 364',className:'incursion'},
-        {d:'M 426 286 Q 449 324 470 360',className:'incursion'}]},
+        {d:'M 429 288 Q 434 322 438 356',className:'incursion'},
+        {d:'M 429 288 Q 445 316 460 348',className:'incursion'}]},
     {mode:'org',markers:[
       {x:43.1,y:56.2,label:'AVIVIM',tone:'red'},{x:45.5,y:54.4,label:'KIRYAT SHMONA',tone:'red'},{x:40.5,y:60.9,label:'MAALOT',tone:'red'}],
       routes:[
-        {d:'M 414 302 Q 424 336 436 364',className:'attack'},
-        {d:'M 434 296 Q 446 324 466 350',className:'attack'},
-        {d:'M 398 316 Q 405 348 415 386',className:'attack'}]},
+        {d:'M 414 304 Q 424 334 436 362',className:'attack'},
+        {d:'M 434 298 Q 446 322 464 348',className:'attack'},
+        {d:'M 400 318 Q 406 350 414 384',className:'attack'}]},
     {mode:'org',markers:[
-      {x:43.6,y:53.9,label:'IDF ADVANCE',tone:'gold'},{x:40.7,y:31.6,label:'LITANI LINE',tone:'blue'},{x:39.6,y:16.6,label:'BEIRUT',tone:'red'}],
+      {x:43.0,y:53.7,label:'IDF ADVANCE',tone:'gold'},{x:40.7,y:31.4,label:'LITANI LINE',tone:'blue'},{x:40.7,y:16.8,label:'BEIRUT',tone:'red'}],
       routes:[
-        {d:'M 430 390 Q 424 348 418 312 T 413 236',className:'push'},
-        {d:'M 448 388 Q 439 346 432 308 T 425 244',className:'push'}]}
+        {d:'M 428 388 Q 422 350 417 318 T 413 256',className:'push'},
+        {d:'M 444 386 Q 438 348 432 318 T 427 262',className:'push'}]}
   ],
   '1982':[
     {mode:'org',markers:[
@@ -280,6 +280,66 @@ const INTEL_SCENES={
   ]
 };
 
+
+// Chapter 1 uses a geographic coordinate system, not the uncalibrated photographic overlay.
+// The three settlements use the coordinates supplied by the educator in degrees, minutes and seconds.
+const CHAPTER_ONE_BOUNDS={west:34.78,east:36.04,south:32.91,north:34.02};
+const CHAPTER_ONE_PLACES={
+  maalot:{lat:33+1/60+15.3/3600,lon:35+16/60+38/3600},
+  avivim:{lat:33+5/60+15.6/3600,lon:35+28/60+16.4/3600},
+  kiryat:{lat:33+12/60+44.8/3600,lon:35+34/60+13.1/3600},
+  beirut:{lat:33.89332,lon:35.50157},
+  litaniMouth:{lat:33.3399,lon:35.2446},
+  litaniKhardale:{lat:33+20/60+22/3600,lon:35+32/60+33/3600},
+};
+const CHAPTER_ONE_INTEL=[
+  {
+    title:'PLO OPERATIONS',
+    // The position of PLO staging bases and their arrows is illustrative, not a surveyed base location.
+    markers:[{lat:33.33,lon:35.41,label:'PLO BASES',tone:'red',illustrative:true}],
+    routes:[
+      {from:[33.33,35.41],to:[CHAPTER_ONE_PLACES.avivim.lat,CHAPTER_ONE_PLACES.avivim.lon],tone:'incursion'},
+      {from:[33.33,35.41],to:[CHAPTER_ONE_PLACES.kiryat.lat,CHAPTER_ONE_PLACES.kiryat.lon],tone:'incursion'}
+    ],
+    note:'Base and incursion arrows are illustrative, not verified operational routes.'
+  },
+  {
+    title:'BORDER COMMUNITIES',
+    markers:[
+      {...CHAPTER_ONE_PLACES.maalot,label:'MA’ALOT',tone:'red',position:'above'},
+      {...CHAPTER_ONE_PLACES.avivim,label:'AVIVIM',tone:'red',position:'right'},
+      {...CHAPTER_ONE_PLACES.kiryat,label:'KIRYAT SHMONA',tone:'red',position:'above'}
+    ],routes:[],note:'All three town markers use the coordinates supplied for this activity.'
+  },
+  {
+    title:'OPERATION LITANI',
+    markers:[
+      {...CHAPTER_ONE_PLACES.beirut,label:'BEIRUT · REFERENCE',tone:'blue',position:'right'},
+      {lat:33.34,lon:35.405,label:'LITANI RIVER',tone:'blue',position:'above'},
+      {lat:33.205,lon:35.37,label:'IDF ADVANCE',tone:'gold',position:'left'}
+    ],
+    routes:[
+      {from:[33.085,35.33],to:[33.275,35.36],tone:'advance'},
+      {from:[33.12,35.52],to:[33.295,35.515],tone:'advance'}
+    ],
+    river:[
+      [CHAPTER_ONE_PLACES.litaniMouth.lat,CHAPTER_ONE_PLACES.litaniMouth.lon],
+      [33.335,35.32],[33.33,35.405],[33.337,35.475],
+      [CHAPTER_ONE_PLACES.litaniKhardale.lat,CHAPTER_ONE_PLACES.litaniKhardale.lon]
+    ],
+    note:'Beirut is shown for reference only. The operation advanced into southern Lebanon, not Beirut.'
+  }
+];
+function geoMapPoint(lat,lon){const b=CHAPTER_ONE_BOUNDS;return {x:(lon-b.west)/(b.east-b.west)*1000,y:(b.north-lat)/(b.north-b.south)*563};}
+function renderGeoPin(marker){const pt=geoMapPoint(marker.lat,marker.lon);return `<span class="map-pin geo-pin ${marker.tone||'red'} ${marker.position||'right'}" style="left:${(pt.x/10).toFixed(3)}%;top:${(pt.y/5.63).toFixed(3)}%" data-label="${escapeHTML(marker.label)}" data-lat="${marker.lat.toFixed(6)}" data-lon="${marker.lon.toFixed(6)}"></span>`;}
+function geoLine(pts){return pts.map((p,i)=>{let q=geoMapPoint(p[0],p[1]);return `${i?'L':'M'} ${q.x.toFixed(2)} ${q.y.toFixed(2)}`;}).join(' ');}
+function renderChapterOneMap(){const scene=CHAPTER_ONE_INTEL[state.cue];const arrows=(scene.routes||[]).map((r,i)=>`<path class="geo-route ${r.tone}" d="${geoLine([r.from,r.to])}" marker-end="url(#geo-arrow-${r.tone})" style="animation-delay:${i*.15}s"></path>`).join('');const river=scene.river?`<path class="geo-river" d="${geoLine(scene.river)}"></path>`:'';
+ return `<div class="map-frame geographic" id="mapFrame" data-geographic-scene="${state.cue+1}">
+ <img src="assets/map_1978_geo.webp" alt="Geographically projected map of Lebanon, the northern Israeli border and Beirut, with accurate coastline and settlement locations">
+ <svg class="map-routes geographic-routes" viewBox="0 0 1000 563" preserveAspectRatio="none" aria-hidden="true"><defs><marker id="geo-arrow-incursion" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto" markerUnits="strokeWidth"><path d="M 0 0 L 5 2.5 L 0 5 Z" fill="#efc476"></path></marker><marker id="geo-arrow-advance" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto" markerUnits="strokeWidth"><path d="M 0 0 L 5 2.5 L 0 5 Z" fill="#7fd8eb"></path></marker></defs>${river}${arrows}</svg>
+ <div class="map-vignette"></div><span class="geo-compass" aria-hidden="true">N ↑</span>${scene.markers.map(renderGeoPin).join('')}</div>
+ <div class="geographic-legend"><strong>◉ ${scene.title}</strong><span>${escapeHTML(scene.note)}</span></div>`;}
+
 function chapterDisplay(c){return Object.assign({},c,CHAPTER_IMAGE_OVERRIDES[c.year]||{});}
 function getIntelScene(c){const list=INTEL_SCENES[c.year]||[];return list[state.cue]||{mode:'base',markers:c.markers||[],routes:c.route?[{d:c.route,className:c.year==='2000'?'withdraw':'push'}]:[]};}
 function renderSceneRoutes(scene){const routes=(scene.routes||[]).length?scene.routes:(scene.route?[{d:scene.route,className:'push'}]:[]);return routes.map(r=>`<path class="${escapeHTML(r.className||'push')}" d="${escapeHTML(r.d)}"></path>`).join('');}
@@ -358,8 +418,9 @@ function renderCabinet(){let c=chapter(), scene=getIntelScene(c);const frameClas
  <div class="cabinet-title-row"><div><span class="eyebrow">ISRAELI SECURITY CABINET / BRIEFING ${c.number}</span><h1>${escapeHTML(c.title)}</h1><p class="chapter-subtitle">${escapeHTML(c.subtitle)}</p></div><span class="cabinet-date">${c.year}</span></div>
  <div class="cabinet-layout">
    <aside class="cabinet-col intel-col"><div class="dossier"><span class="intel-tag">TOP SECRET · HISTORICAL FILE</span><h3>THE SITUATION</h3>${c.context.map((x,i)=>`<div class="item"><b>0${i+1}</b><span>${escapeHTML(x)}</span></div>`).join('')}</div><div class="contextphoto ${c.cabinetPhoto?'featured-context-photo':''}"><img src="assets/${c.cabinetPhoto||c.archive}" alt="${escapeHTML(c.cabinetPhotoLabel||c.archiveLabel)}"><div class="captionbar">ARCHIVE MATERIAL · ${c.year}<br>${escapeHTML(c.cabinetPhotoLabel||c.archiveLabel)}</div></div></aside>
-   <div class="cabinet-col map-col"><section class="map-display" aria-label="Animated illustrative northern border map"><div class="map-header"><strong>◉ NORTHERN SECTOR MAP</strong><span>INTELLIGENCE DISPLAY / ${c.year}</span></div><div class="map-frame map-anim-enter ${frameClass}" id="mapFrame"><img src="assets/map_base.webp" alt="Terrain map showing Lebanon and northern Israel"><img class="map-overlay-image" src="assets/${c.map}" alt="Illustrative armed organisation overlay"><img class="map-overlay-amal" src="assets/map_amal.webp" alt="Illustrative Amal context map"><svg class="map-routes" viewBox="0 0 1000 563" preserveAspectRatio="none" aria-hidden="true">${renderSceneRoutes(scene)}</svg><div class="map-vignette"></div><div class="map-scan"></div><span class="map-label lebanon">🇱🇧 LEBANON</span><span class="map-label israel">🇮🇱 ISRAEL</span>${(scene.markers||[]).map(m=>`<span class="map-pin ${m.tone}" style="left:${m.x}%;top:${m.y}%" data-label="${escapeHTML(m.label)}"></span>`).join('')}</div>
-   <div class="map-legend"><div class="segmented"><button type="button" data-action="mapbase" class="${!state.mapOverlay&&!state.mapAmal?'active':''}" aria-pressed="${!state.mapOverlay&&!state.mapAmal}">TERRAIN</button><button type="button" data-action="maporg" class="${state.mapOverlay?'active':''}" aria-pressed="${state.mapOverlay}">HISTORICAL OVERLAY</button>${(c.year==='1982'||c.year==='1993'||c.year==='2000')?`<button type="button" data-action="mapamal" class="${state.mapAmal?'active':''}" aria-pressed="${state.mapAmal}">AMAL CONTEXT</button>`:''}</div><span class="map-note">Schematic positions, not exact operational data</span></div></section>
+   <div class="cabinet-col map-col"><section class="map-display" aria-label="Animated illustrative northern border map"><div class="map-header"><strong>◉ NORTHERN SECTOR MAP</strong><span>INTELLIGENCE DISPLAY / ${c.year}</span></div>${c.year==='1978'?renderChapterOneMap():`<div class="map-frame map-anim-enter ${frameClass}" id="mapFrame"><img src="assets/map_base.webp" alt="Terrain map showing Lebanon and northern Israel"><img class="map-overlay-image" src="assets/${c.map}" alt="Illustrative armed organisation overlay"><img class="map-overlay-amal" src="assets/map_amal.webp" alt="Illustrative Amal context map"><svg class="map-routes" viewBox="0 0 1000 563" preserveAspectRatio="none" aria-hidden="true">${renderSceneRoutes(scene)}</svg><div class="map-vignette"></div><div class="map-scan"></div><span class="map-label lebanon">🇱🇧 LEBANON</span><span class="map-label israel">🇮🇱 ISRAEL</span>${(scene.markers||[]).map(m=>`<span class="map-pin ${m.tone}" style="left:${m.x}%;top:${m.y}%" data-label="${escapeHTML(m.label)}"></span>`).join('')}</div>
+   `}
+   ${c.year==='1978'?'':`<div class="map-legend"><div class="segmented"><button type="button" data-action="mapbase" class="${!state.mapOverlay&&!state.mapAmal?'active':''}" aria-pressed="${!state.mapOverlay&&!state.mapAmal}">TERRAIN</button><button type="button" data-action="maporg" class="${state.mapOverlay?'active':''}" aria-pressed="${state.mapOverlay}">HISTORICAL OVERLAY</button>${(c.year==='1982'||c.year==='1993'||c.year==='2000')?`<button type="button" data-action="mapamal" class="${state.mapAmal?'active':''}" aria-pressed="${state.mapAmal}">AMAL CONTEXT</button>`:''}</div><span class="map-note">Schematic positions, not exact operational data</span></div>`}</section>
    <div class="map-cue"><b>INTEL ${state.cue+1}/3</b><span>${escapeHTML(c.mapCues[state.cue])}</span><button type="button" class="btn btn-small" style="margin-left:auto;min-width:90px" data-action="nextcue">NEXT →</button></div><div class="cabinet-task"><strong>YOUR CABINET MISSION</strong><p>${escapeHTML(c.objective)}</p></div></div>
    <aside class="cabinet-col adviser-col">${renderAdviser(c.military,'military')}${renderAdviser(c.diplomatic,'diplomatic')}</aside>
  </div>

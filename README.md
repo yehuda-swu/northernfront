@@ -107,3 +107,12 @@ Both clips and the new photographs may contain third party copyrighted material.
 * Chapter 5 historical reveal: supplied 2006 photograph of Israeli soldiers.
 * Both bundled MP4 clips automatically play in the briefing as embedded videos. Autoplay is muted for browser compatibility, with controls to unmute and pause. The expand button opens an enlarged player.
 * New photographs are resized and compressed to WebP for GitHub Pages.
+
+
+## Version 9: geographically calibrated Chapter 1
+
+The 1978 PLO Threat cabinet intelligence map uses an independent geographic background built from GSHHG / Basemap coastline and boundary data instead of plotting coordinates on the old uncalibrated satellite illustration. Its latitude and longitude bounds are embedded in `game.js` as `CHAPTER_ONE_BOUNDS`. The image itself is in `assets/map_1978_geo.webp` and is included locally for offline GitHub Pages use.
+
+The settlement markers for Ma'alot, Avivim, and Kiryat Shmona use the exact DMS coordinates supplied by the educator, converted mathematically to decimal degrees. Beirut uses its GeoNames location. The Litani River mouth is sourced to a World Bank study; the river line between reference points is illustrative. The PLO base and incursion arrows are illustrative and do not claim to reproduce exact historical attack routes. The 1978 IDF arrows stop in southern Lebanon, not at Beirut.
+
+The other five chapters and their historical map overlays remain unchanged.

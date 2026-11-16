@@ -76,3 +76,14 @@ Maps with organisational symbols are schematic visuals, not statements of precis
 * `assets/media/lebanon_2006_reveal.webp`: 2006 Israeli soldiers photograph supplied by the user. Shown in Chapter 5 historical reveal.
 
 Photo rights and attribution require confirmation before public deployment.
+
+
+## Chapter 1 geographic map sources and methodology (Version 9)
+
+* Beirut city coordinates, GeoNames: https://www.geonames.org/276781/beirut.html (33.89332 N, 35.50157 E)
+* Litani mouth near Qasmiyeh, World Bank coastal assessment: https://documents1.worldbank.org/curated/en/099062323113010114/pdf/P17943507fe0bb0230b7730a8e0fb75d3ed.pdf (33.3399 N, 35.2446 E)
+* Litani Khardale section, scientific assessment: https://bdd.pseau.org/outils/ouvrages/cnrsl_the_litani_river_lebanon_an_assessment_and_current_challenges_2018.pdf
+* Coastline and country boundary geography: GSHHG database shipped with Basemap, https://www.soest.hawaii.edu/pwessel/gshhg/ ; image is a locally produced, stylised rendering.
+* Ma'alot, Avivim and Kiryat Shmona: supplied by educator as degrees, minutes and seconds. Converted with degrees + minutes/60 + seconds/3600 in the game source.
+
+Town and Beirut positions are projected from their latitude/longitude. Military movements and the location of the illustrative PLO base are educational schematics, not surveyed incident locations or verified operational routes. The lower Litani trace is an educational approximation between sourced geographic reference points.
